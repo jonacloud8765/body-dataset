@@ -31,7 +31,9 @@ const run = (args) => {
 };
 const picture = out.replace(/\.mp4$/, '.picture.mp4');
 run(['remotion', 'render', 'src/index.ts', id, picture, '--muted', ...extra]);
-run(['remotion', 'ffmpeg', '-v', 'error', '-y', '-i', picture, '-ss', audioFrom, '-i', song, '-map', '0:v', '-map', '1:a', '-shortest',
+// the song is padded with silence and cut where the picture ends: the film runs past the song
+// (the silent epilogue), a clip taken from the middle of it ends before the song does
+run(['remotion', 'ffmpeg', '-v', 'error', '-y', '-i', picture, '-ss', audioFrom, '-i', song, '-map', '0:v', '-map', '1:a', '-af', 'apad', '-shortest',
   '-c:v', 'copy', '-c:a', 'aac', '-b:a', '320k', '-movflags', '+faststart', out]);
 rmSync(resolve(here, '..', picture));
 console.log(`wrote ${out}`);

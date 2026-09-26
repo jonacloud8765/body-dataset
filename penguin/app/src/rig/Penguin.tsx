@@ -156,7 +156,7 @@ export const PenguinRig: React.FC<Props> = ({body, bodyId, heads, head, pose = {
   const fwd = side && farFoot === 'forward';
   // the forward foot is drawn standing 10 px above the sheet's baseline (the other foot reaches
   // it): on his feet, he stands that much lower so both soles are on the snow
-  const sole = fwd && !pose.spin ? 10 : 0;
+  const sole = fwd ? 10 * Math.max(0, 1 - Math.abs(pose.spin ?? 0) / 30) : 0;
   const legs = [
     {m: mA, hip: upper(hipA0), ankle: pose.ankleA ?? spinP(ankA0), hip0: hipA0, ank0: ankA0, foot: body.parts[fwd ? `foot${kB}` : `foot${kA}`], footAnk0: fwd ? ankB0 : ankA0, footAngle: pose.footA ?? spin, bend: pose.bend ?? 1, flat: side ? 1 : 0.25},
     {m: mB, hip: upper(hipB0), ankle: pose.ankleB ?? spinP(ankB0), hip0: hipB0, ank0: ankB0, foot: body.parts[`foot${kB}`], footAnk0: ankB0, footAngle: pose.footB ?? spin, bend: pose.bend ?? 1, flat: side ? 1 : 0.25},

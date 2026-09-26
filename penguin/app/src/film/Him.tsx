@@ -63,6 +63,51 @@ export const poseFor = (sheet: Sheet, bodyId: '34' | 'front', pose: HimPose, bea
   }
 };
 
+/** Where the ankles rest when a pose leaves them alone. */
+const restAnkles = (sheet: Sheet, bodyId: '34' | 'front'): [Vec, Vec] => {
+  const b = sheet.bodies[bodyId];
+  return bodyId === '34'
+    ? [[b.legs.Far.ankle.x, b.joints.ankleFar[1]], [b.legs.Near.ankle.x, b.joints.ankleNear[1]]]
+    : [[b.legs.L.ankle.x, b.joints.ankleL[1]], [b.legs.R.ankle.x, b.joints.ankleR[1]]];
+};
+
+/**
+ * A pose between two poses (u 0-1): the in-betweens when he changes pose, so he gets up, dives,
+ * lands and bows through the motion instead of snapping to it.
+ */
+export const blendPose = (sheet: Sheet, bodyId: '34' | 'front', a: RigPose, b: RigPose, u: number): RigPose => {
+  const [rA, rB] = restAnkles(sheet, bodyId);
+  const k = u * u * (3 - 2 * u);
+  const n = (x: number | undefined, y: number | undefined, d: number) => (x ?? d) + ((y ?? d) - (x ?? d)) * k;
+  const v = (x: Vec | undefined, y: Vec | undefined, d: Vec): Vec => [n(x?.[0], y?.[0], d[0]), n(x?.[1], y?.[1], d[1])];
+  // with no explicit ankle, a spun pose carries the foot round the pelvis; blend from where it really is
+  const ankle = (p: RigPose, d: Vec, key: 'ankleA' | 'ankleB'): Vec => {
+    if (p[key]) return p[key]!;
+    if (!p.spin) return d;
+    const b = sheet.bodies[bodyId];
+    const J = b.joints;
+    const pel: Vec = bodyId === '34' ? [(b.legs.Far.top.x + b.legs.Near.top.x) / 2, J.hipFar[1]] : [(b.legs.L.top.x + b.legs.R.top.x) / 2, J.hipL[1]];
+    const r = (p.spin * Math.PI) / 180;
+    const off = p.pelvis ?? [0, 0];
+    const dx = d[0] - pel[0];
+    const dy = d[1] - pel[1];
+    return [pel[0] + dx * Math.cos(r) - dy * Math.sin(r) + off[0], pel[1] + dx * Math.sin(r) + dy * Math.cos(r) + off[1]];
+  };
+  return {
+    pelvis: v(a.pelvis, b.pelvis, [0, 0]),
+    lean: n(a.lean, b.lean, 0),
+    headTilt: n(a.headTilt, b.headTilt, 0),
+    ankleA: v(ankle(a, rA, 'ankleA'), ankle(b, rA, 'ankleA'), rA),
+    ankleB: v(ankle(a, rB, 'ankleB'), ankle(b, rB, 'ankleB'), rB),
+    footA: n(a.footA ?? a.spin, b.footA ?? b.spin, 0),
+    footB: n(a.footB ?? a.spin, b.footB ?? b.spin, 0),
+    squash: n(a.squash, b.squash, 1),
+    spin: n(a.spin, b.spin, 0),
+    flipper: n(a.flipper, b.flipper, 0),
+    bend: k < 0.5 ? a.bend : b.bend,
+  };
+};
+
 type Props = {
   sheet: Sheet;
   P: WorldPalette;
@@ -125,7 +170,7 @@ export const Him: React.FC<Props> = ({sheet, P, look = FLAT_LOOK, view, head, fa
   const s = h / body.height;
   const lying = pose === 'fallen' || pose === 'toboggan';
   const inAir = pose === 'airborne' || pose === 'lifted';
-  const walking = pose === 'walk' || pose === 'climb';
+  const walking = pose === 'walk';
   const rig = (l: RigLook) => (
     <PenguinRig body={body} bodyId={bodyId} heads={sheet.heads} head={hd} pose={rigPose} x={x} y={y} h={h} facing={facing} light={light} look={l} headFlip={headTurn > 0.5 && !front} />
   );
@@ -147,7 +192,7 @@ export const Him: React.FC<Props> = ({sheet, P, look = FLAT_LOOK, view, head, fa
       {shadow ? (
         lying ? (
           <ellipse cx={x + (pose === 'toboggan' ? 60 : -90) * s * facing} cy={y + 2} rx={170 * s} ry={9 * s} fill={P.snowShade} />
-        ) : inAir ? null : feet.length ? (
+        ) : inAir || pose === 'climb' ? null : feet.length ? (
           feet.map((ft, i) => {
             const lift = Math.max(0, ft.rest - ft.a[1]);
             const k = Math.max(0.35, 1 - lift / 30);

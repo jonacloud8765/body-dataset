@@ -10,7 +10,7 @@ import {beatsAt, FPS, GRID, HEIGHT, WIDTH} from '../timing/song';
 import type {Shot} from '../timing/timeline';
 import {FlatGround, FlatMountain, FlatRanges, FlatSky, FootPrint, SnowKick, type EyeLook} from '../world/Flat';
 import {mixHex, mixWorld, WORLD, type Tod, type WorldPalette} from '../world/palette';
-import {Him, type HimPose, type HimView} from './Him';
+import {blendPose, Him, poseFor, type HimPose, type HimView} from './Him';
 import {ColonyCrowd, CrewMember} from './People';
 import {
   Aurora,
@@ -574,8 +574,31 @@ const PenguinEl: React.FC<{el: Extract<El, {k: 'penguin'}>; c: Ctx}> = ({el, c})
     if (pose === 'climb' && Math.abs(dxdf) > 0.05) slope = Math.max(0, Math.min(38, (Math.atan2(-dydf, Math.abs(dxdf)) * 180) / Math.PI));
   }
   const tiny = h < 40;
-  const rigPose: RigPose | undefined = undefined;
   const back = view === 'back' || view === 'back34';
+
+  // a change of pose plays through a few in-between frames (not across a change of view)
+  let rigPose: RigPose | undefined;
+  if (!back && view !== 'top' && !tiny) {
+    const changes = el.keys
+      .filter((k) => k.pose !== undefined)
+      .map((k) => res(k.at))
+      .filter((kf) => kf <= f && kf > 0)
+      .sort((a, b) => b - a);
+    const kf = changes[0];
+    if (kf !== undefined) {
+      const before = poseAt(el, kf - 1, res);
+      const span = before === 'fallen' || pose === 'fallen' ? 9 : 6;
+      const viewThen = (latest(el.keys, kf - 1, res, 'view', 'side') ?? 'side') as HimView;
+      if (before !== pose && f - kf < span && viewThen === view) {
+        const bodyId = view === 'front' ? 'front' : '34';
+        const tk = (shot.from + kf) / FPS;
+        const bk = beatsAt(tk) * rate;
+        const from = poseFor(c.sheet, bodyId, before, bk, tk, {stride});
+        const to = poseFor(c.sheet, bodyId, pose, beatsW, c.t, {stride, slope});
+        rigPose = blendPose(c.sheet, bodyId, from, to, (f - kf + 1) / (span + 1));
+      }
+    }
+  }
 
   // prints: every footfall stays where it landed
   const printsOn = el.prints ?? (!tiny && (view === 'side' || view === 'front34' || back) && pose === 'walk');
