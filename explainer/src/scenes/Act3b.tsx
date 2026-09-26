@@ -1,7 +1,7 @@
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {C, CONDITIONS, FONT_DISPLAY, FONT_MONO, H, W, mixHex} from '../theme';
-import {EASE, EASE_OUT, clamp, lerp, p, rand} from '../lib/anim';
+import {EASE, EASE_OUT, lerp, p, rand} from '../lib/anim';
 import {Figure, POSES, anchor, mixPose, runPose, walkPose} from '../components/Figure';
 import {Cam, Plaza, WORLD, laneScale, toScreen} from '../components/World';
 import {Crowd, CrowdShadows} from '../components/Crowd';
@@ -202,7 +202,7 @@ export const S22Readout: React.FC<SceneProps> = ({T0}) => {
   const railY = 900;
   const out = p(t, 16.2, 16.95);
   return (
-    <AbsoluteFill style={{background: C.NIGHT, opacity: 1 - out * 0.0}}>
+    <AbsoluteFill style={{background: C.NIGHT}}>
       <svg width={W} height={H} style={{position: 'absolute'}}>
         {Array.from({length: 20}).map((_, k) => (
           <line key={k} x1={k * 100} x2={k * 100} y1={0} y2={H} stroke={C.IRON} strokeWidth={1} opacity={0.12} />
@@ -247,7 +247,6 @@ export const S22Readout: React.FC<SceneProps> = ({T0}) => {
       </div>
       <div style={{position: 'absolute', left: 0, right: 0, bottom: 0, height: lerp(0, 138, out), background: C.INK}} />
       <div style={{position: 'absolute', left: 0, right: 0, top: 0, height: lerp(0, 138, out), background: C.INK}} />
-      <div style={{position: 'absolute', left: 0, top: 0, width: W, height: H, background: C.INK, opacity: clamp(out * 0)}} />
     </AbsoluteFill>
   );
 };
