@@ -1,0 +1,1914 @@
+{
+ "source": {
+  "song": "penguin/source/im-the-penguin.mp3",
+  "vocals": "penguin/source/im-the-penguin-vocals.mp3",
+  "duration_s": 137.16,
+  "sample_rate": 48000,
+  "channels": 2,
+  "loudness_lufs": -13.5,
+  "key": "F minor",
+  "stem_offset_ms": -5.8
+ },
+ "grid": {
+  "bpm": 99.092,
+  "beat_s": 0.6055,
+  "bar_s": 2.422,
+  "meter": 4,
+  "first_bar_s": 0.0817,
+  "fps": 30,
+  "bars": 57,
+  "constant_tempo": true,
+  "groove": "half-time: snare on beat 3, eighth-note hats",
+  "method": "refit on drum-hit onsets; median residual 7.8 ms, p95 26.5 ms"
+ },
+ "bar_starts": [
+  {
+   "bar": 1,
+   "t": 0.082,
+   "frame": 2,
+   "mix_db": -11.7,
+   "intensity": 0.268,
+   "drums": false,
+   "vocal": true,
+   "layers_db": {
+    "kick": -32.8,
+    "snare": -31.6,
+    "hats": -33.7,
+    "bass": -17.4,
+    "vocal": -17.9
+   }
+  },
+  {
+   "bar": 2,
+   "t": 2.504,
+   "frame": 75,
+   "mix_db": -11.9,
+   "intensity": 0.256,
+   "drums": false,
+   "vocal": true,
+   "layers_db": {
+    "kick": -31.8,
+    "snare": -28.1,
+    "hats": -31.2,
+    "bass": -16.9,
+    "vocal": -9.2
+   }
+  },
+  {
+   "bar": 3,
+   "t": 4.926,
+   "frame": 148,
+   "mix_db": -17.1,
+   "intensity": 0.0,
+   "drums": false,
+   "vocal": true,
+   "layers_db": {
+    "kick": -34.2,
+    "snare": -28.2,
+    "hats": -43.7,
+    "bass": -26.1,
+    "vocal": -23.5
+   }
+  },
+  {
+   "bar": 4,
+   "t": 7.348,
+   "frame": 220,
+   "mix_db": -15.1,
+   "intensity": 0.058,
+   "drums": false,
+   "vocal": true,
+   "layers_db": {
+    "kick": -30.6,
+    "snare": -26.3,
+    "hats": -47.1,
+    "bass": -21.8,
+    "vocal": -24.0
+   }
+  },
+  {
+   "bar": 5,
+   "t": 9.77,
+   "frame": 293,
+   "mix_db": -15.5,
+   "intensity": 0.032,
+   "drums": false,
+   "vocal": true,
+   "layers_db": {
+    "kick": -33.8,
+    "snare": -22.1,
+    "hats": -23.3,
+    "bass": -25.1,
+    "vocal": -16.6
+   }
+  },
+  {
+   "bar": 6,
+   "t": 12.192,
+   "frame": 366,
+   "mix_db": -11.4,
+   "intensity": 0.287,
+   "drums": false,
+   "vocal": true,
+   "layers_db": {
+    "kick": -34.0,
+    "snare": -11.4,
+    "hats": -10.8,
+    "bass": -22.7,
+    "vocal": -7.2
+   }
+  },
+  {
+   "bar": 7,
+   "t": 14.614,
+   "frame": 438,
+   "mix_db": -12.3,
+   "intensity": 0.23,
+   "drums": false,
+   "vocal": true,
+   "layers_db": {
+    "kick": -28.7,
+    "snare": -12.7,
+    "hats": -18.3,
+    "bass": -15.9,
+    "vocal": -9.5
+   }
+  },
+  {
+   "bar": 8,
+   "t": 17.036,
+   "frame": 511,
+   "mix_db": -10.1,
+   "intensity": 0.367,
+   "drums": false,
+   "vocal": true,
+   "layers_db": {
+    "kick": -25.9,
+    "snare": -16.6,
+    "hats": -24.3,
+    "bass": -16.8,
+    "vocal": -7.0
+   }
+  },
+  {
+   "bar": 9,
+   "t": 19.458,
+   "frame": 584,
+   "mix_db": -2.7,
+   "intensity": 0.834,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -2.5,
+    "snare": -6.6,
+    "hats": -6.8,
+    "bass": -2.9,
+    "vocal": -11.0
+   }
+  },
+  {
+   "bar": 10,
+   "t": 21.88,
+   "frame": 656,
+   "mix_db": -7.2,
+   "intensity": 0.552,
+   "drums": false,
+   "vocal": true,
+   "layers_db": {
+    "kick": -21.3,
+    "snare": -6.2,
+    "hats": -3.3,
+    "bass": -8.5,
+    "vocal": -5.4
+   }
+  },
+  {
+   "bar": 11,
+   "t": 24.302,
+   "frame": 729,
+   "mix_db": -1.8,
+   "intensity": 0.888,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -2.3,
+    "snare": -5.9,
+    "hats": -4.0,
+    "bass": -1.6,
+    "vocal": -8.4
+   }
+  },
+  {
+   "bar": 12,
+   "t": 26.724,
+   "frame": 802,
+   "mix_db": -4.3,
+   "intensity": 0.729,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -8.6,
+    "snare": -5.3,
+    "hats": -3.2,
+    "bass": -3.6,
+    "vocal": -6.9
+   }
+  },
+  {
+   "bar": 13,
+   "t": 29.146,
+   "frame": 874,
+   "mix_db": -3.4,
+   "intensity": 0.788,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -0.5,
+    "snare": -7.4,
+    "hats": -4.8,
+    "bass": -5.3,
+    "vocal": -9.7
+   }
+  },
+  {
+   "bar": 14,
+   "t": 31.568,
+   "frame": 947,
+   "mix_db": -7.0,
+   "intensity": 0.563,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -16.2,
+    "snare": -6.4,
+    "hats": -5.1,
+    "bass": -8.1,
+    "vocal": -7.6
+   }
+  },
+  {
+   "bar": 15,
+   "t": 33.99,
+   "frame": 1020,
+   "mix_db": -4.6,
+   "intensity": 0.713,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -2.7,
+    "snare": -8.0,
+    "hats": -5.3,
+    "bass": -5.8,
+    "vocal": -10.8
+   }
+  },
+  {
+   "bar": 16,
+   "t": 36.412,
+   "frame": 1092,
+   "mix_db": -9.6,
+   "intensity": 0.398,
+   "drums": false,
+   "vocal": true,
+   "layers_db": {
+    "kick": -25.5,
+    "snare": -6.3,
+    "hats": -7.1,
+    "bass": -17.7,
+    "vocal": -5.6
+   }
+  },
+  {
+   "bar": 17,
+   "t": 38.834,
+   "frame": 1165,
+   "mix_db": -2.7,
+   "intensity": 0.832,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -1.1,
+    "snare": -5.0,
+    "hats": -3.3,
+    "bass": -3.8,
+    "vocal": -6.9
+   }
+  },
+  {
+   "bar": 18,
+   "t": 41.256,
+   "frame": 1238,
+   "mix_db": -5.5,
+   "intensity": 0.657,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -14.4,
+    "snare": -3.5,
+    "hats": -1.6,
+    "bass": -5.3,
+    "vocal": -5.5
+   }
+  },
+  {
+   "bar": 19,
+   "t": 43.678,
+   "frame": 1310,
+   "mix_db": -3.0,
+   "intensity": 0.813,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -3.3,
+    "snare": -4.0,
+    "hats": -2.1,
+    "bass": -3.2,
+    "vocal": -6.9
+   }
+  },
+  {
+   "bar": 20,
+   "t": 46.1,
+   "frame": 1383,
+   "mix_db": -4.7,
+   "intensity": 0.708,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -4.2,
+    "snare": -1.4,
+    "hats": -1.6,
+    "bass": -7.1,
+    "vocal": -1.9
+   }
+  },
+  {
+   "bar": 21,
+   "t": 48.522,
+   "frame": 1456,
+   "mix_db": -3.9,
+   "intensity": 0.758,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -1.5,
+    "snare": -3.4,
+    "hats": -1.7,
+    "bass": -6.4,
+    "vocal": -7.5
+   }
+  },
+  {
+   "bar": 22,
+   "t": 50.944,
+   "frame": 1528,
+   "mix_db": -5.1,
+   "intensity": 0.683,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -14.1,
+    "snare": -2.1,
+    "hats": -0.8,
+    "bass": -4.8,
+    "vocal": -6.3
+   }
+  },
+  {
+   "bar": 23,
+   "t": 53.366,
+   "frame": 1601,
+   "mix_db": -3.3,
+   "intensity": 0.791,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -3.2,
+    "snare": -4.0,
+    "hats": -3.0,
+    "bass": -3.3,
+    "vocal": -8.8
+   }
+  },
+  {
+   "bar": 24,
+   "t": 55.788,
+   "frame": 1674,
+   "mix_db": -3.8,
+   "intensity": 0.765,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -5.8,
+    "snare": -2.8,
+    "hats": -2.1,
+    "bass": -3.7,
+    "vocal": -5.6
+   }
+  },
+  {
+   "bar": 25,
+   "t": 58.21,
+   "frame": 1746,
+   "mix_db": -2.8,
+   "intensity": 0.825,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -1.1,
+    "snare": -5.1,
+    "hats": -2.9,
+    "bass": -3.8,
+    "vocal": -4.9
+   }
+  },
+  {
+   "bar": 26,
+   "t": 60.632,
+   "frame": 1819,
+   "mix_db": -3.9,
+   "intensity": 0.758,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -13.4,
+    "snare": -2.7,
+    "hats": -1.7,
+    "bass": -2.6,
+    "vocal": -1.2
+   }
+  },
+  {
+   "bar": 27,
+   "t": 63.054,
+   "frame": 1892,
+   "mix_db": -1.9,
+   "intensity": 0.883,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -3.7,
+    "snare": -3.9,
+    "hats": -3.4,
+    "bass": -1.2,
+    "vocal": 0.0
+   }
+  },
+  {
+   "bar": 28,
+   "t": 65.476,
+   "frame": 1964,
+   "mix_db": -2.8,
+   "intensity": 0.827,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -6.7,
+    "snare": -3.6,
+    "hats": -3.8,
+    "bass": -0.9,
+    "vocal": -2.6
+   }
+  },
+  {
+   "bar": 29,
+   "t": 67.898,
+   "frame": 2037,
+   "mix_db": -2.2,
+   "intensity": 0.861,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -4.7,
+    "snare": -5.2,
+    "hats": -3.8,
+    "bass": -6.1,
+    "vocal": -5.8
+   }
+  },
+  {
+   "bar": 30,
+   "t": 70.32,
+   "frame": 2110,
+   "mix_db": -6.0,
+   "intensity": 0.624,
+   "drums": false,
+   "vocal": true,
+   "layers_db": {
+    "kick": -21.6,
+    "snare": -3.8,
+    "hats": -2.7,
+    "bass": -10.2,
+    "vocal": -6.2
+   }
+  },
+  {
+   "bar": 31,
+   "t": 72.742,
+   "frame": 2182,
+   "mix_db": -1.8,
+   "intensity": 0.889,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -2.3,
+    "snare": -4.6,
+    "hats": -2.9,
+    "bass": -4.8,
+    "vocal": -7.8
+   }
+  },
+  {
+   "bar": 32,
+   "t": 75.164,
+   "frame": 2255,
+   "mix_db": -4.5,
+   "intensity": 0.716,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -10.0,
+    "snare": -3.2,
+    "hats": -2.4,
+    "bass": -11.2,
+    "vocal": -5.3
+   }
+  },
+  {
+   "bar": 33,
+   "t": 77.586,
+   "frame": 2328,
+   "mix_db": -2.0,
+   "intensity": 0.872,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -3.3,
+    "snare": -3.8,
+    "hats": -2.8,
+    "bass": -5.8,
+    "vocal": -5.3
+   }
+  },
+  {
+   "bar": 34,
+   "t": 80.008,
+   "frame": 2400,
+   "mix_db": -3.4,
+   "intensity": 0.786,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -13.1,
+    "snare": -2.2,
+    "hats": 0.0,
+    "bass": -4.7,
+    "vocal": -4.2
+   }
+  },
+  {
+   "bar": 35,
+   "t": 82.43,
+   "frame": 2473,
+   "mix_db": -2.1,
+   "intensity": 0.868,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -3.2,
+    "snare": -2.9,
+    "hats": -4.3,
+    "bass": -5.1,
+    "vocal": -6.6
+   }
+  },
+  {
+   "bar": 36,
+   "t": 84.852,
+   "frame": 2546,
+   "mix_db": -4.1,
+   "intensity": 0.745,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -10.6,
+    "snare": -2.0,
+    "hats": -2.7,
+    "bass": -11.4,
+    "vocal": -5.5
+   }
+  },
+  {
+   "bar": 37,
+   "t": 87.274,
+   "frame": 2618,
+   "mix_db": -2.3,
+   "intensity": 0.856,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": 0.0,
+    "snare": -3.7,
+    "hats": -3.9,
+    "bass": -3.4,
+    "vocal": -6.2
+   }
+  },
+  {
+   "bar": 38,
+   "t": 89.696,
+   "frame": 2691,
+   "mix_db": -3.3,
+   "intensity": 0.791,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -13.2,
+    "snare": -2.1,
+    "hats": -2.2,
+    "bass": -2.2,
+    "vocal": -3.2
+   }
+  },
+  {
+   "bar": 39,
+   "t": 92.118,
+   "frame": 2764,
+   "mix_db": -1.7,
+   "intensity": 0.891,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -2.7,
+    "snare": -2.5,
+    "hats": -3.7,
+    "bass": -2.2,
+    "vocal": -4.0
+   }
+  },
+  {
+   "bar": 40,
+   "t": 94.54,
+   "frame": 2836,
+   "mix_db": -1.8,
+   "intensity": 0.89,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -5.8,
+    "snare": 0.0,
+    "hats": -3.8,
+    "bass": -4.3,
+    "vocal": -2.0
+   }
+  },
+  {
+   "bar": 41,
+   "t": 96.962,
+   "frame": 2909,
+   "mix_db": -1.2,
+   "intensity": 0.927,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -1.4,
+    "snare": -2.5,
+    "hats": -3.0,
+    "bass": -4.0,
+    "vocal": -10.6
+   }
+  },
+  {
+   "bar": 42,
+   "t": 99.384,
+   "frame": 2982,
+   "mix_db": -2.8,
+   "intensity": 0.826,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -14.5,
+    "snare": -1.3,
+    "hats": -2.5,
+    "bass": -1.6,
+    "vocal": -6.6
+   }
+  },
+  {
+   "bar": 43,
+   "t": 101.806,
+   "frame": 3054,
+   "mix_db": -1.4,
+   "intensity": 0.914,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -2.5,
+    "snare": -2.8,
+    "hats": -4.6,
+    "bass": -1.8,
+    "vocal": -5.4
+   }
+  },
+  {
+   "bar": 44,
+   "t": 104.228,
+   "frame": 3127,
+   "mix_db": -2.1,
+   "intensity": 0.867,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -6.0,
+    "snare": -1.5,
+    "hats": -1.7,
+    "bass": -3.1,
+    "vocal": -3.4
+   }
+  },
+  {
+   "bar": 45,
+   "t": 106.65,
+   "frame": 3200,
+   "mix_db": -1.1,
+   "intensity": 0.931,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -2.2,
+    "snare": -4.0,
+    "hats": -4.6,
+    "bass": -4.9,
+    "vocal": -2.4
+   }
+  },
+  {
+   "bar": 46,
+   "t": 109.072,
+   "frame": 3272,
+   "mix_db": -3.5,
+   "intensity": 0.784,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -12.7,
+    "snare": -2.2,
+    "hats": -4.4,
+    "bass": -2.5,
+    "vocal": -4.2
+   }
+  },
+  {
+   "bar": 47,
+   "t": 111.494,
+   "frame": 3345,
+   "mix_db": -1.8,
+   "intensity": 0.889,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -3.8,
+    "snare": -3.5,
+    "hats": -5.5,
+    "bass": -2.9,
+    "vocal": -9.4
+   }
+  },
+  {
+   "bar": 48,
+   "t": 113.916,
+   "frame": 3417,
+   "mix_db": -2.8,
+   "intensity": 0.823,
+   "drums": true,
+   "vocal": false,
+   "layers_db": {
+    "kick": -7.9,
+    "snare": -3.2,
+    "hats": -7.0,
+    "bass": -3.3,
+    "vocal": -37.1
+   }
+  },
+  {
+   "bar": 49,
+   "t": 116.338,
+   "frame": 3490,
+   "mix_db": 0.0,
+   "intensity": 1.0,
+   "drums": true,
+   "vocal": false,
+   "layers_db": {
+    "kick": -1.1,
+    "snare": -4.9,
+    "hats": -7.6,
+    "bass": -2.9,
+    "vocal": -75.4
+   }
+  },
+  {
+   "bar": 50,
+   "t": 118.76,
+   "frame": 3563,
+   "mix_db": -2.6,
+   "intensity": 0.835,
+   "drums": true,
+   "vocal": false,
+   "layers_db": {
+    "kick": -17.2,
+    "snare": -4.2,
+    "hats": -7.1,
+    "bass": -0.9,
+    "vocal": -75.4
+   }
+  },
+  {
+   "bar": 51,
+   "t": 121.182,
+   "frame": 3635,
+   "mix_db": -0.8,
+   "intensity": 0.952,
+   "drums": true,
+   "vocal": false,
+   "layers_db": {
+    "kick": -3.1,
+    "snare": -5.3,
+    "hats": -8.5,
+    "bass": -0.8,
+    "vocal": -38.8
+   }
+  },
+  {
+   "bar": 52,
+   "t": 123.604,
+   "frame": 3708,
+   "mix_db": -1.2,
+   "intensity": 0.925,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -5.1,
+    "snare": -4.2,
+    "hats": -7.9,
+    "bass": 0.0,
+    "vocal": -27.2
+   }
+  },
+  {
+   "bar": 53,
+   "t": 126.026,
+   "frame": 3781,
+   "mix_db": -8.0,
+   "intensity": 0.498,
+   "drums": false,
+   "vocal": true,
+   "layers_db": {
+    "kick": -24.6,
+    "snare": -15.4,
+    "hats": -38.8,
+    "bass": -12.0,
+    "vocal": -19.2
+   }
+  },
+  {
+   "bar": 54,
+   "t": 128.448,
+   "frame": 3853,
+   "mix_db": -10.7,
+   "intensity": 0.329,
+   "drums": false,
+   "vocal": false,
+   "layers_db": {
+    "kick": -30.5,
+    "snare": -22.4,
+    "hats": -42.5,
+    "bass": -16.5,
+    "vocal": -31.7
+   }
+  },
+  {
+   "bar": 55,
+   "t": 130.87,
+   "frame": 3926,
+   "mix_db": -7.3,
+   "intensity": 0.543,
+   "drums": false,
+   "vocal": true,
+   "layers_db": {
+    "kick": -25.6,
+    "snare": -21.1,
+    "hats": -39.3,
+    "bass": -16.9,
+    "vocal": -14.4
+   }
+  },
+  {
+   "bar": 56,
+   "t": 133.292,
+   "frame": 3999,
+   "mix_db": -6.4,
+   "intensity": 0.597,
+   "drums": true,
+   "vocal": true,
+   "layers_db": {
+    "kick": -17.2,
+    "snare": -25.5,
+    "hats": -45.9,
+    "bass": -7.7,
+    "vocal": -7.9
+   }
+  },
+  {
+   "bar": 57,
+   "t": 135.714,
+   "frame": 4071,
+   "mix_db": -26.4,
+   "intensity": 0.0,
+   "drums": false,
+   "vocal": true,
+   "layers_db": {
+    "kick": -41.2,
+    "snare": -51.7,
+    "hats": -56.7,
+    "bass": -33.8,
+    "vocal": -24.8
+   }
+  },
+  {
+   "bar": 58,
+   "t": 138.136,
+   "frame": 4144
+  }
+ ],
+ "sections": [
+  {
+   "id": "intro",
+   "name": "Intro",
+   "bars": [
+    1,
+    8
+   ],
+   "start": {
+    "pos": "1.1",
+    "t": 0.082,
+    "frame": 2
+   },
+   "end": {
+    "t": 19.458,
+    "frame": 584
+   },
+   "notes": "Voice over keys/pad, no kick. Quiet background vocal echo in bars 3-4. Hi-hats and snare creep in from bar 5; the line 'began' soars to the song's first high note (bars 7-8)."
+  },
+  {
+   "id": "verse",
+   "name": "Verse",
+   "bars": [
+    9,
+    16
+   ],
+   "start": {
+    "pos": "9.1",
+    "t": 19.458,
+    "frame": 584
+   },
+   "end": {
+    "t": 38.834,
+    "frame": 1165
+   },
+   "notes": "Full band enters on the downbeat of bar 9 (kick, bass). Half-time groove: snare on beat 3. One sung line per bar; kick lighter on even bars. Bar 16 is a lift: kick and bass drop out under a bright riser."
+  },
+  {
+   "id": "chorus1",
+   "name": "Chorus 1",
+   "bars": [
+    17,
+    27
+   ],
+   "start": {
+    "pos": "17.1",
+    "t": 38.834,
+    "frame": 1165
+   },
+   "end": {
+    "t": 65.476,
+    "frame": 1964
+   },
+   "notes": "Full band. Pickup 'I'm the' on beat 4 of bar 16. Ten lines; a high held 'yeah' crosses bars 25-26; the chorus closes with a tag, 'I'm meeting the creator', on the melody of line 4 (bars 26-27)."
+  },
+  {
+   "id": "bridge",
+   "name": "Bridge",
+   "bars": [
+    28,
+    36
+   ],
+   "start": {
+    "pos": "28.1",
+    "t": 65.476,
+    "frame": 1964
+   },
+   "end": {
+    "t": 87.274,
+    "frame": 2618
+   },
+   "notes": "One line per bar in two parallel halves (bars 28-31 and 32-35). 'Wow' lands on beat 3 of bar 35. Bar 36 is an extra sung bar (echo of line 8; words not on the lyric sheet). Kick and bass lighter on even bars."
+  },
+  {
+   "id": "chorus2",
+   "name": "Chorus 2",
+   "bars": [
+    37,
+    47
+   ],
+   "start": {
+    "pos": "37.1",
+    "t": 87.274,
+    "frame": 2618
+   },
+   "end": {
+    "t": 113.916,
+    "frame": 3417
+   },
+   "notes": "Same melody as Chorus 1 exactly 20 bars later (pickup on beat 4 of bar 36). High held 'yeah' from bar 45 beat 2.5 to bar 46 beat 2; tag 'I'm meeting the creator' in bars 46-47."
+  },
+  {
+   "id": "climax",
+   "name": "Instrumental climax",
+   "bars": [
+    48,
+    52
+   ],
+   "start": {
+    "pos": "48.1",
+    "t": 113.916,
+    "frame": 3417
+   },
+   "end": {
+    "t": 126.026,
+    "frame": 3781
+   },
+   "notes": "No lead vocal. The loudest bars in the song (bar 49 peaks), heavy and bass-driven, less bright. A soft hummed vocal enters at bar 51 beat 3.5."
+  },
+  {
+   "id": "outro",
+   "name": "Outro",
+   "bars": [
+    53,
+    57
+   ],
+   "start": {
+    "pos": "53.1",
+    "t": 126.026,
+    "frame": 3781
+   },
+   "end": {
+    "t": 137.16,
+    "frame": 4115
+   },
+   "notes": "The band cuts out on the downbeat of bar 53: pad and voice only. A slow vocal reprise on the tag melody: a held note (bar 53), a quiet rise (bar 54), a held high note (bar 55 beat 2.7 to beat 4.7, the song's top note), a low final note (bar 56). Fade in bar 57; the file ends at 137.16 s."
+  }
+ ],
+ "lines": [
+  {
+   "id": "I1",
+   "section": "intro",
+   "text": "Seventy kilometers",
+   "start": {
+    "pos": "1.3",
+    "t": 1.293,
+    "frame": 39
+   },
+   "end": {
+    "pos": "2.3.5",
+    "t": 4.017,
+    "frame": 121
+   },
+   "confidence": "high"
+  },
+  {
+   "id": "I2",
+   "section": "intro",
+   "text": "That's what they said",
+   "start": {
+    "pos": "2.3.6",
+    "t": 4.078,
+    "frame": 122
+   },
+   "end": {
+    "pos": "3.2",
+    "t": 5.531,
+    "frame": 166
+   },
+   "confidence": "high"
+  },
+  {
+   "id": "I2e",
+   "section": "intro",
+   "text": "(background vocal echo)",
+   "start": {
+    "pos": "3.2",
+    "t": 5.531,
+    "frame": 166
+   },
+   "end": {
+    "pos": "5.2.5",
+    "t": 10.678,
+    "frame": 320
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "I3",
+   "section": "intro",
+   "text": "Seventy kilometers",
+   "start": {
+    "pos": "5.3",
+    "t": 10.981,
+    "frame": 329
+   },
+   "end": {
+    "pos": "6.3.5",
+    "t": 13.705,
+    "frame": 411
+   },
+   "confidence": "high"
+  },
+  {
+   "id": "I4",
+   "section": "intro",
+   "text": "From where I began",
+   "start": {
+    "pos": "6.3.5",
+    "t": 13.705,
+    "frame": 411
+   },
+   "end": {
+    "pos": "8.4.2",
+    "t": 18.973,
+    "frame": 569
+   },
+   "confidence": "high"
+  },
+  {
+   "id": "V1",
+   "section": "verse",
+   "text": "I'm the penguin",
+   "start": {
+    "pos": "8.4.5",
+    "t": 19.155,
+    "frame": 575
+   },
+   "end": {
+    "pos": "9.4",
+    "t": 21.274,
+    "frame": 638
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "V2",
+   "section": "verse",
+   "text": "Walking out alone",
+   "start": {
+    "pos": "10.1.5",
+    "t": 22.182,
+    "frame": 665
+   },
+   "end": {
+    "pos": "11.1.5",
+    "t": 24.604,
+    "frame": 738
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "V3",
+   "section": "verse",
+   "text": "Turn my back on",
+   "start": {
+    "pos": "11.2",
+    "t": 24.907,
+    "frame": 747
+   },
+   "end": {
+    "pos": "11.4.8",
+    "t": 26.603,
+    "frame": 798
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "V4",
+   "section": "verse",
+   "text": "everything I know",
+   "start": {
+    "pos": "12.1",
+    "t": 26.724,
+    "frame": 802
+   },
+   "end": {
+    "pos": "12.4.8",
+    "t": 29.025,
+    "frame": 871
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "V5",
+   "section": "verse",
+   "text": "Nothing's going my way",
+   "start": {
+    "pos": "13.1",
+    "t": 29.146,
+    "frame": 874
+   },
+   "end": {
+    "pos": "13.4.8",
+    "t": 31.447,
+    "frame": 943
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "V6",
+   "section": "verse",
+   "text": "So I'll go my own way",
+   "start": {
+    "pos": "13.4.8",
+    "t": 31.447,
+    "frame": 943
+   },
+   "end": {
+    "pos": "14.4.5",
+    "t": 33.687,
+    "frame": 1011
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "V7",
+   "section": "verse",
+   "text": "I feel it, I can't explain",
+   "start": {
+    "pos": "14.4.5",
+    "t": 33.687,
+    "frame": 1011
+   },
+   "end": {
+    "pos": "15.3.5",
+    "t": 35.503,
+    "frame": 1065
+   },
+   "confidence": "low"
+  },
+  {
+   "id": "V8",
+   "section": "verse",
+   "text": "I'm the penguin",
+   "start": {
+    "pos": "15.3.5",
+    "t": 35.503,
+    "frame": 1065
+   },
+   "end": {
+    "pos": "16.1.2",
+    "t": 36.533,
+    "frame": 1096
+   },
+   "confidence": "low"
+  },
+  {
+   "id": "V9",
+   "section": "verse",
+   "text": "And I'm walking every day",
+   "start": {
+    "pos": "16.1.2",
+    "t": 36.533,
+    "frame": 1096
+   },
+   "end": {
+    "pos": "16.3.75",
+    "t": 38.077,
+    "frame": 1142
+   },
+   "confidence": "high"
+  },
+  {
+   "id": "C1_1",
+   "section": "chorus1",
+   "text": "I'm the penguin",
+   "start": {
+    "pos": "16.4",
+    "t": 38.228,
+    "frame": 1147
+   },
+   "end": {
+    "pos": "17.2",
+    "t": 39.439,
+    "frame": 1183
+   },
+   "confidence": "high"
+  },
+  {
+   "id": "C1_2",
+   "section": "chorus1",
+   "text": "I know where I'm going",
+   "start": {
+    "pos": "17.2.5",
+    "t": 39.742,
+    "frame": 1192
+   },
+   "end": {
+    "pos": "18.1.5",
+    "t": 41.558,
+    "frame": 1247
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "C1_3",
+   "section": "chorus1",
+   "text": "Heading for the mountain",
+   "start": {
+    "pos": "18.2",
+    "t": 41.861,
+    "frame": 1256
+   },
+   "end": {
+    "pos": "19.1.5",
+    "t": 43.98,
+    "frame": 1319
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "C1_4",
+   "section": "chorus1",
+   "text": "I'm meeting the creator, yeah",
+   "start": {
+    "pos": "19.2",
+    "t": 44.283,
+    "frame": 1328
+   },
+   "end": {
+    "pos": "20.4.5",
+    "t": 48.219,
+    "frame": 1447
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "C1_5",
+   "section": "chorus1",
+   "text": "We're making a documentary",
+   "start": {
+    "pos": "20.4.5",
+    "t": 48.219,
+    "frame": 1447
+   },
+   "end": {
+    "pos": "21.4.5",
+    "t": 50.641,
+    "frame": 1519
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "C1_6",
+   "section": "chorus1",
+   "text": "Can we interrupt your journey",
+   "start": {
+    "pos": "22.1",
+    "t": 50.944,
+    "frame": 1528
+   },
+   "end": {
+    "pos": "22.4.5",
+    "t": 53.063,
+    "frame": 1592
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "C1_7",
+   "section": "chorus1",
+   "text": "I'm the penguin",
+   "start": {
+    "pos": "22.4.5",
+    "t": 53.063,
+    "frame": 1592
+   },
+   "end": {
+    "pos": "23.2.5",
+    "t": 54.274,
+    "frame": 1628
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "C1_8",
+   "section": "chorus1",
+   "text": "I know where I'm going",
+   "start": {
+    "pos": "23.3",
+    "t": 54.577,
+    "frame": 1637
+   },
+   "end": {
+    "pos": "24.1.5",
+    "t": 56.09,
+    "frame": 1683
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "C1_9",
+   "section": "chorus1",
+   "text": "Heading for the mountain, yeah",
+   "start": {
+    "pos": "24.2",
+    "t": 56.393,
+    "frame": 1692
+   },
+   "end": {
+    "pos": "26.1.5",
+    "t": 60.934,
+    "frame": 1828
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "C1_10",
+   "section": "chorus1",
+   "text": "I'm meeting the creator",
+   "start": {
+    "pos": "26.2",
+    "t": 61.237,
+    "frame": 1837
+   },
+   "end": {
+    "pos": "27.4.8",
+    "t": 65.355,
+    "frame": 1961
+   },
+   "confidence": "high"
+  },
+  {
+   "id": "B1",
+   "section": "bridge",
+   "text": "Don't turn me around",
+   "start": {
+    "pos": "28.1",
+    "t": 65.476,
+    "frame": 1964
+   },
+   "end": {
+    "pos": "28.4.8",
+    "t": 67.777,
+    "frame": 2033
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "B2",
+   "section": "bridge",
+   "text": "Don't turn me around",
+   "start": {
+    "pos": "29.1",
+    "t": 67.898,
+    "frame": 2037
+   },
+   "end": {
+    "pos": "29.4.8",
+    "t": 70.199,
+    "frame": 2106
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "B3",
+   "section": "bridge",
+   "text": "Don't care about what you want",
+   "start": {
+    "pos": "30.1",
+    "t": 70.32,
+    "frame": 2110
+   },
+   "end": {
+    "pos": "30.4.8",
+    "t": 72.621,
+    "frame": 2179
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "B4",
+   "section": "bridge",
+   "text": "I'm tryna figure it out",
+   "start": {
+    "pos": "31.1",
+    "t": 72.742,
+    "frame": 2182
+   },
+   "end": {
+    "pos": "31.4.8",
+    "t": 75.043,
+    "frame": 2251
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "B5",
+   "section": "bridge",
+   "text": "Don't turn me around",
+   "start": {
+    "pos": "32.1",
+    "t": 75.164,
+    "frame": 2255
+   },
+   "end": {
+    "pos": "32.4.8",
+    "t": 77.465,
+    "frame": 2324
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "B6",
+   "section": "bridge",
+   "text": "Don't turn me around",
+   "start": {
+    "pos": "33.1",
+    "t": 77.586,
+    "frame": 2328
+   },
+   "end": {
+    "pos": "33.4.8",
+    "t": 79.887,
+    "frame": 2397
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "B7",
+   "section": "bridge",
+   "text": "There's something up ahead now",
+   "start": {
+    "pos": "34.1",
+    "t": 80.008,
+    "frame": 2400
+   },
+   "end": {
+    "pos": "34.3.8",
+    "t": 81.703,
+    "frame": 2451
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "B8",
+   "section": "bridge",
+   "text": "And I'm almost there, wow",
+   "start": {
+    "pos": "34.4",
+    "t": 81.824,
+    "frame": 2455
+   },
+   "end": {
+    "pos": "35.3.6",
+    "t": 84.004,
+    "frame": 2520
+   },
+   "confidence": "high"
+  },
+  {
+   "id": "B8e",
+   "section": "bridge",
+   "text": "(extra sung bar, echo of line 8: words to confirm)",
+   "start": {
+    "pos": "35.4",
+    "t": 84.246,
+    "frame": 2527
+   },
+   "end": {
+    "pos": "36.3.5",
+    "t": 86.365,
+    "frame": 2591
+   },
+   "confidence": "low"
+  },
+  {
+   "id": "C2_1",
+   "section": "chorus2",
+   "text": "I'm the penguin",
+   "start": {
+    "pos": "36.4",
+    "t": 86.668,
+    "frame": 2600
+   },
+   "end": {
+    "pos": "37.2",
+    "t": 87.879,
+    "frame": 2636
+   },
+   "confidence": "high"
+  },
+  {
+   "id": "C2_2",
+   "section": "chorus2",
+   "text": "I know where I'm going",
+   "start": {
+    "pos": "37.2.5",
+    "t": 88.182,
+    "frame": 2645
+   },
+   "end": {
+    "pos": "38.1.5",
+    "t": 89.998,
+    "frame": 2700
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "C2_3",
+   "section": "chorus2",
+   "text": "Heading for the mountain",
+   "start": {
+    "pos": "38.2",
+    "t": 90.301,
+    "frame": 2709
+   },
+   "end": {
+    "pos": "39.1.5",
+    "t": 92.42,
+    "frame": 2773
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "C2_4",
+   "section": "chorus2",
+   "text": "I'm meeting the creator, yeah",
+   "start": {
+    "pos": "39.2",
+    "t": 92.723,
+    "frame": 2782
+   },
+   "end": {
+    "pos": "40.4.5",
+    "t": 96.659,
+    "frame": 2900
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "C2_5",
+   "section": "chorus2",
+   "text": "We're making a documentary",
+   "start": {
+    "pos": "40.4.5",
+    "t": 96.659,
+    "frame": 2900
+   },
+   "end": {
+    "pos": "41.4.5",
+    "t": 99.081,
+    "frame": 2972
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "C2_6",
+   "section": "chorus2",
+   "text": "Can we interrupt your journey",
+   "start": {
+    "pos": "42.1",
+    "t": 99.384,
+    "frame": 2982
+   },
+   "end": {
+    "pos": "42.4.5",
+    "t": 101.503,
+    "frame": 3045
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "C2_7",
+   "section": "chorus2",
+   "text": "I'm the penguin",
+   "start": {
+    "pos": "42.4.5",
+    "t": 101.503,
+    "frame": 3045
+   },
+   "end": {
+    "pos": "43.2.5",
+    "t": 102.714,
+    "frame": 3081
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "C2_8",
+   "section": "chorus2",
+   "text": "I know where I'm going",
+   "start": {
+    "pos": "43.3",
+    "t": 103.017,
+    "frame": 3091
+   },
+   "end": {
+    "pos": "44.1.5",
+    "t": 104.53,
+    "frame": 3136
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "C2_9",
+   "section": "chorus2",
+   "text": "Heading for the mountain, yeah",
+   "start": {
+    "pos": "44.2",
+    "t": 104.833,
+    "frame": 3145
+   },
+   "end": {
+    "pos": "46.2",
+    "t": 109.677,
+    "frame": 3290
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "C2_10",
+   "section": "chorus2",
+   "text": "I'm meeting the creator",
+   "start": {
+    "pos": "46.2",
+    "t": 109.677,
+    "frame": 3290
+   },
+   "end": {
+    "pos": "47.4.8",
+    "t": 113.795,
+    "frame": 3414
+   },
+   "confidence": "high"
+  },
+  {
+   "id": "O0",
+   "section": "outro",
+   "text": "(soft hum)",
+   "start": {
+    "pos": "51.3.5",
+    "t": 122.695,
+    "frame": 3681
+   },
+   "end": {
+    "pos": "52.4",
+    "t": 125.42,
+    "frame": 3763
+   },
+   "confidence": "medium"
+  },
+  {
+   "id": "O1",
+   "section": "outro",
+   "text": "(slow reprise of the tag: words to confirm, likely '\u2026the creator')",
+   "start": {
+    "pos": "52.4",
+    "t": 125.42,
+    "frame": 3763
+   },
+   "end": {
+    "pos": "56.1",
+    "t": 133.292,
+    "frame": 3999
+   },
+   "confidence": "low"
+  },
+  {
+   "id": "O2",
+   "section": "outro",
+   "text": "(low final note)",
+   "start": {
+    "pos": "56.1",
+    "t": 133.292,
+    "frame": 3999
+   },
+   "end": {
+    "pos": "56.4.7",
+    "t": 135.532,
+    "frame": 4066
+   },
+   "confidence": "medium"
+  }
+ ],
+ "events": [
+  {
+   "id": "band_in",
+   "pos": "9.1",
+   "t": 19.458,
+   "frame": 584,
+   "what": "Full band enters (kick, bass)"
+  },
+  {
+   "id": "lift",
+   "pos": "16.1",
+   "t": 36.412,
+   "frame": 1092,
+   "what": "Kick and bass drop; bright riser into the chorus"
+  },
+  {
+   "id": "chorus1",
+   "pos": "17.1",
+   "t": 38.834,
+   "frame": 1165,
+   "what": "Chorus 1 downbeat"
+  },
+  {
+   "id": "yeah1",
+   "pos": "25.4",
+   "t": 60.026,
+   "frame": 1801,
+   "what": "High held 'yeah' (to bar 26 beat 1.5)"
+  },
+  {
+   "id": "wow",
+   "pos": "35.2",
+   "t": 83.035,
+   "frame": 2491,
+   "what": "'Wow': the high held note from beat 2 (the phonetic match puts the vowel at beat 3; confirm by ear)"
+  },
+  {
+   "id": "chorus2",
+   "pos": "37.1",
+   "t": 87.274,
+   "frame": 2618,
+   "what": "Chorus 2 downbeat"
+  },
+  {
+   "id": "yeah2",
+   "pos": "45.2.5",
+   "t": 107.558,
+   "frame": 3227,
+   "what": "High held 'yeah' (to bar 46 beat 2)"
+  },
+  {
+   "id": "vox_out",
+   "pos": "48.1.5",
+   "t": 114.218,
+   "frame": 3427,
+   "what": "Lead vocal stops"
+  },
+  {
+   "id": "peak",
+   "pos": "49.1",
+   "t": 116.338,
+   "frame": 3490,
+   "what": "Loudest bar of the song"
+  },
+  {
+   "id": "hum",
+   "pos": "51.3.5",
+   "t": 122.695,
+   "frame": 3681,
+   "what": "Soft hummed vocal enters"
+  },
+  {
+   "id": "dropout",
+   "pos": "53.1",
+   "t": 126.026,
+   "frame": 3781,
+   "what": "Band cuts out: pad and voice only"
+  },
+  {
+   "id": "top_note",
+   "pos": "55.2.7",
+   "t": 131.899,
+   "frame": 3957,
+   "what": "Held high note, the song's top note (to beat 4.7)"
+  },
+  {
+   "id": "low_note",
+   "pos": "56.1",
+   "t": 133.292,
+   "frame": 3999,
+   "what": "Low final note (to beat 4.7)"
+  },
+  {
+   "id": "fade",
+   "pos": "57.1",
+   "t": 135.714,
+   "frame": 4071,
+   "what": "Fade"
+  }
+ ],
+ "notes": [
+  "Positions are bar.beat (beat 1-4.99). Bar n starts at first_bar_s + (n-1) * bar_s.",
+  "Line positions come from the vocal stem: level, sung melody, phonetic recognition and melodic repetition (the intro's 'Seventy kilometers' repeats at bar 5 beat 3; Chorus 2 repeats Chorus 1 twenty bars later with a mean pitch error of 0.4 semitones). Confidence 'high' = within a quarter beat, 'medium' = within half a beat, 'low' = within a beat. Confirm by ear in the animatic.",
+  "bar_starts[].mix_db / intensity / drums / vocal / layers_db: per-bar levels relative to the loudest bar (intensity 0-1 from the mix level); drums = kick within 18 dB of its loudest bar."
+ ]
+}

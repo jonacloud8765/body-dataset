@@ -2,16 +2,17 @@
 """Measure the song so every shot can be placed on the real music.
 
 Usage:
-  python3 analyze.py SONG [--vocals VOCALS] [--lyrics lyrics.txt] [--out DIR]
+  python3 analyze.py SONG [--vocals VOCALS] [--song-map song-map.json] [--out DIR]
 
 Writes:
-  DIR/raw.json        tempo, beat grid, bars, per-bar features, novelty boundaries,
-                      vocal phrases, word and line alignment
+  DIR/raw.json        tempo, beat grid (refit to the drum hits), bars with per-bar features,
+                      novelty boundaries, vocal activity
   DIR/overview.png    whole song: waveform, spectrogram, intensity, novelty, vocals
-  DIR/detail-*.png    30 s windows of the same, with bar numbers and lyric lines
+  DIR/detail-*.png    30 s windows of the same, with bar numbers and beat ticks
 
-Everything here is measured, not assumed. The curated section map that the storyboard
-and the Remotion timeline use is written by hand from this output (see README.md).
+With --song-map, the plots label the curated sung lines. The sung lines themselves are placed
+with align_lyrics.py, checked on plot_vocals.py's sheets, and curated into song-map.json,
+which is what the storyboard reads.
 """
 import argparse
 import json
@@ -89,18 +90,38 @@ def fit_grid(beats):
     return float(t0), float(per), res, keep
 
 
-def refine_phase(oenv, t0, per, dur):
-    """Slide the grid (+-60 ms) to where it lands on the strongest onsets."""
-    best, best_o = -1.0, 0.0
-    for o in np.arange(-0.06, 0.0601, 0.002):
-        g = np.arange(t0 + o, dur, per)
-        fr = librosa.time_to_frames(g[g >= 0], sr=SR, hop_length=HOP)
-        fr = fr[fr < len(oenv)]
-        sc = oenv[fr].mean()
-        if sc > best:
-            best, best_o = sc, o
-    t = t0 + best_o
-    return float(t - np.floor(t / per) * per), float(best_o)
+def refit_on_hits(path, t0, per):
+    """Refit the grid to where the drum hits actually start.
+
+    Trackers report beats some tens of milliseconds off the audible attack, by an amount that
+    depends on the mix. The strongest 1.5-6 kHz transients (snare, claps, hats) are found,
+    backtracked to 10% of their rise, and the grid is refit to the hits that sit within a
+    quarter beat of it."""
+    sr, hop = 44100, 64  # 1.5 ms frames: full rate, so attacks aren't smeared
+    y = librosa.load(path, sr=sr, mono=True)[0]
+    S = np.abs(librosa.stft(y, n_fft=1024, hop_length=hop))
+    f = librosa.fft_frequencies(sr=sr, n_fft=1024)
+    t = librosa.frames_to_time(np.arange(S.shape[1]), sr=sr, hop_length=hop)
+    e = np.log1p(S[(f >= 1500) & (f < 6000)].sum(0))
+    fl = np.maximum(0, np.diff(e, prepend=e[:1]))
+    pk, _ = sps.find_peaks(fl, height=np.percentile(fl, 99.7), distance=int(0.25 * sr / hop))
+    hits = []
+    for pidx in pk:
+        q = pidx
+        while q > 0 and fl[q - 1] > 0.1 * fl[pidx]:
+            q -= 1
+        hits.append(t[q])
+    h = np.array(hits)
+    for _ in range(3):
+        k = np.round((h - t0) / per)
+        m = np.abs(h - (t0 + k * per)) < 0.25 * per
+        A = np.vstack([np.ones(m.sum()), k[m]]).T
+        (t0, per), *_ = np.linalg.lstsq(A, h[m], rcond=None)
+    k = np.round((h - t0) / per)
+    res = h - (t0 + k * per)
+    res = res[np.abs(res) < 0.25 * per]
+    t0 -= np.floor(t0 / per) * per
+    return float(t0), float(per), res, len(h)
 
 
 def local_tempo(beats, win=8):
@@ -238,153 +259,6 @@ def vocal_activity(yv, hop=128, hi=26, lo=38, merge=0.25, min_len=0.12, phrase_g
     return merged, phrases, onsets, (t, db - ref)
 
 
-# ---------------------------------------------------------------- lyrics
-
-SYL = {"kilometers": 4, "documentary": 5, "every": 2, "everything": 3, "creator": 3,
-       "seventy": 3, "interrupt": 3, "nothings": 2, "nothing's": 2, "tryna": 2, "we're": 1,
-       "i'm": 1, "i'll": 1, "don't": 1, "that's": 1, "there's": 1, "can't": 1, "wow": 1,
-       "yeah": 1, "going": 2, "journey": 2, "figure": 2, "explain": 2, "alone": 2, "around": 2}
-
-
-def syllables(word):
-    w = word.lower()
-    if w in SYL:
-        return SYL[w]
-    n = len(re.findall(r"[aeiouy]+", w))
-    if w.endswith("e") and n > 1 and not w.endswith(("le", "ee")):
-        n -= 1
-    return max(1, n)
-
-
-def read_lyrics(path):
-    sections, cur = [], None
-    for raw in Path(path).read_text().splitlines():
-        line = raw.strip()
-        if not line:
-            continue
-        m = re.match(r"^\[(.+)\]$", line)
-        if m:
-            cur = {"name": m.group(1), "lines": []}
-            sections.append(cur)
-        else:
-            cur["lines"].append(line)
-    return sections
-
-
-def words_of(line):
-    return re.findall(r"[A-Za-z']+", line.lower())
-
-
-def align_lines(segs, onsets, sections, w_dur=1.0, w_gap=2.0, w_bound=0.9, w_onset=1.2,
-                w_skip=2.0):
-    """Place every lyric line on the vocal stem, in order.
-
-    Candidate line starts are vocal segment starts (after a silence) and vocal onsets
-    inside continuous singing. Dynamic programming picks one start per line so that each
-    line's sung time matches its syllable count, lines start after pauses where possible,
-    and no line straddles a long silence (an instrumental break). Vocals before the first
-    line or after the last one (ad-libs) can be skipped at a cost.
-    """
-    lines = [(s["name"], li, t) for s in sections for li, t in enumerate(s["lines"])]
-    syl = np.array([sum(syllables(w) for w in words_of(t)) for _, _, t in lines], float)
-    segs = np.asarray(segs, float)
-    seg_s, seg_e = segs[:, 0], segs[:, 1]
-    cum = np.concatenate([[0], np.cumsum(seg_e - seg_s)])
-
-    def active(t):  # sung seconds before t
-        t = np.asarray(t, float)
-        i = np.searchsorted(seg_s, t, side="right")
-        part = np.where(i > 0, np.clip(t - seg_s[np.maximum(i - 1, 0)], 0,
-                                       (seg_e - seg_s)[np.maximum(i - 1, 0)]), 0)
-        return cum[np.maximum(i - 1, 0)] * (i > 0) + part
-
-    gaps = np.concatenate([[10.0], seg_s[1:] - seg_e[:-1]])  # silence before each segment
-    cand_t = list(seg_s)
-    cand_g = list(np.minimum(gaps, 4.0))
-    for o in onsets:  # onsets inside singing, not near a segment start
-        i = np.searchsorted(seg_s, o, side="right") - 1
-        if i >= 0 and seg_s[i] + 0.12 < o < seg_e[i] - 0.12:
-            cand_t.append(o)
-            cand_g.append(0.0)
-    order = np.argsort(cand_t)
-    ct = np.array(cand_t)[order]
-    cg = np.array(cand_g)[order]
-    C = len(ct)
-    end_t = seg_e[-1] + 0.01
-    act_c = active(ct)
-    act_end = float(active(end_t))
-    rate = act_end / syl.sum()
-
-    # the longest silence strictly inside (a, b): precompute per candidate pair lazily
-    big_gap_idx = np.flatnonzero(gaps[1:] > 0.25) + 1  # segment indices preceded by a pause
-
-    def max_gap_inside(a, bvec):
-        out = np.zeros(len(bvec))
-        inside = big_gap_idx[seg_s[big_gap_idx] > a + 1e-6]
-        if len(inside) == 0:
-            return out
-        gs = gaps[inside]
-        st = seg_s[inside]
-        for k, bb in enumerate(bvec):
-            m = st < bb - 1e-6
-            if m.any():
-                out[k] = gs[m].max()
-        return out
-
-    def bound_cost(g):
-        return np.where(g > 0, -w_bound * np.log1p(np.minimum(g, 3.0) / 0.1), w_onset)
-
-    n = len(lines)
-    INF = 1e18
-    dp = np.full((n + 1, C + 1), INF)  # dp[i, j]: lines < i placed, line i starts at cand j
-    bp = np.zeros((n + 1, C + 1), int)
-    dp[0, :C] = w_skip * act_c / rate / 4 + bound_cost(cg)
-    ends = np.concatenate([ct, [end_t]])
-    act_all = np.concatenate([act_c, [act_end]])
-    for i in range(n):
-        exp = syl[i] * rate
-        for j in np.flatnonzero(dp[i, :C] < INF):
-            ks = np.arange(j + 1, C + 1)
-            sung = act_all[ks] - act_c[j]
-            ok = (sung > 0.3 * exp) & (sung < 3.5 * exp)
-            if not ok.any():
-                continue
-            ks, sung = ks[ok], sung[ok]
-            cost = w_dur * np.log(sung / exp) ** 2
-            cost += w_gap * np.maximum(0, max_gap_inside(ct[j], ends[ks]) - 0.9)
-            nb = np.where(ks < C, bound_cost(cg[np.minimum(ks, C - 1)]), 0.0)
-            if i == n - 1:  # the last line may leave trailing ad-libs unaligned
-                nb = nb + w_skip * (act_end - act_all[ks]) / rate / 4
-            tot = dp[i, j] + cost + nb
-            better = tot < dp[i + 1, ks]
-            dp[i + 1, ks[better]] = tot[better]
-            bp[i + 1, ks[better]] = j
-    k = int(np.argmin(dp[n]))
-    if dp[n, k] >= INF:
-        return None
-    starts = []
-    for i in range(n, 0, -1):
-        j = bp[i, k]
-        starts.append((j, k))
-        k = j
-    starts.reverse()
-    out = []
-    for (sec, li, text), (j, k), sy in zip(lines, starts, syl):
-        a, b = ct[j], ends[k]
-        inside = segs[(seg_e > a) & (seg_s < b)]
-        start = max(a, inside[0, 0]) if len(inside) else a
-        stop = min(b, inside[-1, 1]) if len(inside) else b
-        # approximate word times: share the line's sung time by syllables
-        ws = words_of(text)
-        wsyl = np.array([syllables(w) for w in ws], float)
-        edges = start + (stop - start) * np.concatenate([[0], np.cumsum(wsyl)]) / wsyl.sum()
-        out.append({"section": sec, "line": li, "text": text, "start": round(float(start), 3),
-                    "end": round(float(stop), 3), "syllables": int(sy),
-                    "boundary": "pause" if cg[j] > 0 else "onset",
-                    "words": [{"w": w, "t": round(float(e), 3)} for w, e in zip(ws, edges[:-1])]})
-    return out
-
-
 # ---------------------------------------------------------------- plots
 
 def plot(out_dir, y, dur, bars, bar_rows, beats, nov, nov_peaks, vocal, lines, title):
@@ -471,7 +345,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("song")
     ap.add_argument("--vocals")
-    ap.add_argument("--lyrics", default=str(Path(__file__).with_name("lyrics.txt")))
+    ap.add_argument("--song-map", help="label the curated lines from this song-map.json in the plots")
     ap.add_argument("--out", default=str(Path(__file__).parent / "out"))
     ap.add_argument("--meter", type=int, default=4)
     ap.add_argument("--beats", choices=["auto", "essentia", "librosa"], default="auto")
@@ -491,17 +365,14 @@ def main():
     if pick == "auto":
         pick = "essentia" if tr["essentia_confidence"] >= 2.5 else "librosa"
     beats = tr[f"{pick}_beats"]
-    t0, per, res, keep = fit_grid(beats)
-    oenv = librosa.onset.onset_strength(y=y, sr=SR, hop_length=HOP)
-    t0, shift = refine_phase(oenv, t0, per, dur)
-    res = res[keep]
+    t0, per, _, keep = fit_grid(beats)
+    t0, per, res, n_hits = refit_on_hits(args.song, t0, per)
     lt = local_tempo(beats)
     print(f"tempo essentia {tr['essentia_bpm']:.2f} (conf {tr['essentia_confidence']:.2f}), "
-          f"librosa {tr['librosa_bpm']:.2f}; grid {60 / per:.3f} BPM from {pick} "
-          f"({keep.mean() * 100:.0f}% of beats on grid, shifted {shift * 1000:+.0f} ms), "
-          f"residual median {np.median(np.abs(res)) * 1000:.1f} ms, p95 "
-          f"{np.percentile(np.abs(res), 95) * 1000:.1f} ms")
-    constant = bool(np.percentile(np.abs(res), 95) < 0.025)
+          f"librosa {tr['librosa_bpm']:.2f}; {keep.mean() * 100:.0f}% of {pick} beats on one grid; "
+          f"refit to {len(res)} of {n_hits} drum hits: {60 / per:.3f} BPM, residual median "
+          f"{np.median(np.abs(res)) * 1000:.1f} ms, p95 {np.percentile(np.abs(res), 95) * 1000:.1f} ms")
+    constant = bool(np.percentile(np.abs(res), 95) < 0.030)
     if constant:
         grid = np.arange(t0, dur, per)
     else:
@@ -524,27 +395,22 @@ def main():
                   for p, s in nov_peaks]
 
     vocal = None
-    lines, align_note = None, "no vocals given"
-    sections = read_lyrics(args.lyrics)
     if args.vocals:
         yv = librosa.load(args.vocals, sr=SR, mono=True)[0]
         segs, phrases, v_onsets, curve = vocal_activity(yv)
         f0, voiced, _ = librosa.pyin(yv, fmin=70, fmax=1000, sr=SR, hop_length=HOP * 2)
         vocal = {"segments": segs, "phrases": phrases, "curve": curve,
                  "f0": (librosa.times_like(f0, sr=SR, hop_length=HOP * 2), f0)}
-        print(f"vocals: {len(segs)} segments, {len(phrases)} phrases, {len(v_onsets)} onsets")
-        lines = align_lines(segs, v_onsets, sections)
-        align_note = "syllable/pause DP on the vocal stem" if lines else "alignment failed"
-        vocal["onsets"] = v_onsets
-        print(f"alignment: {align_note}")
+        print(f"vocals: {len(segs)} active segments, {len(phrases)} phrases")
+    lines = None
+    if args.song_map:
+        sm = json.loads(Path(args.song_map).read_text())
+        lines = [{"text": ln["text"], "start": ln["start"]["t"], "end": ln["end"]["t"]} for ln in sm["lines"]]
 
     def bar_pos(t):
         x = (t - bars[0]) / (per * bpb)
         b = int(np.floor(x))
         return b + 1, round((x - b) * bpb + 1, 2)
-
-    for ln in lines or []:
-        ln["bar"], ln["beat"] = bar_pos(ln["start"])
 
     result = {
         "source": info,
@@ -557,7 +423,7 @@ def main():
                  "t0": round(t0, 4), "meter": bpb, "downbeat_phase": phase,
                  "phase_margin": round(margin, 3), "phase_scores": phase_scores,
                  "phase_windows": windows, "first_bar": round(float(bars[0]), 4),
-                 "on_grid_fraction": round(float(keep.mean()), 3), "onset_shift_ms": round(shift * 1000, 1),
+                 "tracked_on_grid_fraction": round(float(keep.mean()), 3), "drum_hits_used": int(len(res)),
                  "residual_ms": {"median": round(float(np.median(np.abs(res))) * 1000, 2),
                                  "p95": round(float(np.percentile(np.abs(res), 95)) * 1000, 2),
                                  "max": round(float(np.abs(res).max()) * 1000, 2)}},
@@ -570,7 +436,6 @@ def main():
             "phrases": [{"start": round(p["start"], 3), "end": round(p["end"], 3), "parts": p["parts"],
                          "bar": bar_pos(p["start"])[0], "beat": bar_pos(p["start"])[1]}
                         for p in vocal["phrases"]]},
-        "alignment": {"note": align_note, "lines": lines},
     }
     (out / "raw.json").write_text(json.dumps(result, indent=1))
     plot(out, y, dur, bars, bar_rows, grid, nov, nov_peaks, vocal, lines, info["file"])
