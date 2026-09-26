@@ -95,6 +95,15 @@ def masks(img, box, keep=None, cut_bottom=False):
     cv2.floodFill(flood, np.zeros((h + 4, w + 4), np.uint8), (0, 0), 2)
     outside = flood[1:-1, 1:-1] == 2
     fill = cv2.erode((~outside).astype(np.uint8), disk(gap * K / 2)).astype(bool) | ink
+    if cut_bottom:
+        # the seal only blocks leaks: row by row, the base keeps just what lies between its ink
+        for r in range(base, fill.shape[0]):
+            cols = np.nonzero(ink[r])[0]
+            if len(cols) < 2:
+                fill[r] = False
+            else:
+                fill[r, : cols.min()] = False
+                fill[r, cols.max() + 1 :] = False
     # keep only the largest inside region (drops stray letters and specks)
     n, lab, stats, _ = cv2.connectedComponentsWithStats(fill.astype(np.uint8), 8)
     if n > 2:
@@ -205,6 +214,9 @@ def main():
         out["parts"][f"body.{bid}"] = full
         for pid, poly in b["parts"].items():
             sel = poly_mask(M["fill"].shape, poly, b["box"][0], b["box"][1])
+            # parts cut out of this one (a flipper that swings on its own)
+            for other in b.get("minus", {}).get(pid, []):
+                sel &= ~poly_mask(M["fill"].shape, b["parts"][other], b["box"][0], b["box"][1])
             body["parts"][pid] = layers(M, b["box"], ax, ay, sel)
             if pid == "torso":
                 # the region under the torso's cut line: shading treats that edge as open, not an outline
@@ -214,6 +226,8 @@ def main():
                 body["parts"][pid]["below"] = "M" + "L".join(f"{x - ax:.2f} {y - ay:.2f}" for x, y in below) + "Z"
         for j, (x, y) in b["joints"].items():
             body["joints"][j] = [round(x - ax, 2), round(y - ay, 2)]
+        # lines drawn on a part where a cut-out part used to cover it (the belly edge under a flipper)
+        body["seams"] = {pid: [[round(x - ax, 2), round(y - ay, 2)] for x, y in pts] for pid, pts in b.get("seams", {}).items()}
         # each leg measured off the drawing: width and center where it leaves the torso, at the hem
         # and at the ankle (the fill includes the outline, so widths are outside-to-outside)
         body["legs"] = {}

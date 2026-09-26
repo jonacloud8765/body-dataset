@@ -21,6 +21,10 @@ export type RigLook = {
   navy: string;
   shade: string;
   rim: string;
+  /** the flipper tips turn navy in one hard step instead of a gradient */
+  hardNavy?: boolean;
+  /** line work color, if not the ink of the solid black areas */
+  line?: string;
   /** shadow and rim widths in body units (sheet px) */
   shade_: {torso: number; head: number; leg: number; foot: number};
   rim_: {torso: number; head: number; leg: number; foot: number};
@@ -34,6 +38,18 @@ export const ANIME_LOOK: RigLook = {
   rim: '#5E7BBE',
   shade_: {torso: 17, head: 9, leg: 9, foot: 6},
   rim_: {torso: 4, head: 3, leg: 3, foot: 2},
+};
+
+/** The film's look: flat 2D. Flat fills, the sheet's line work, one hard shadow tone, no rim. */
+export const FLAT_LOOK: RigLook = {
+  white: '#FBF8F2',
+  ink: '#1D2133',
+  navy: '#26406A',
+  shade: '#C9CCE2',
+  rim: '#000000',
+  hardNavy: true,
+  shade_: {torso: 15, head: 8, leg: 8, foot: 0},
+  rim_: {torso: 0, head: 0, leg: 0, foot: 0},
 };
 
 const LINE = 2.4; // outline weight of the drawn legs, sheet px (matches the traced line work)
@@ -201,8 +217,17 @@ export const PenguinRig: React.FC<Props> = ({body, bodyId, heads, head, pose = {
     <g transform={`translate(${f2(x)} ${f2(y)}) scale(${f2(s * facing)} ${f2(s)})`} style={{isolation: 'isolate'}}>
       <defs>
         <linearGradient id={`navy${uid}`} gradientUnits="userSpaceOnUse" x1={0} y1={navyTop} x2={0} y2={navyBottom}>
-          <stop offset="0" stopColor={look.navy} stopOpacity={0} />
-          <stop offset="1" stopColor={look.navy} stopOpacity={0.95} />
+          {look.hardNavy ? (
+            <>
+              <stop offset="0.62" stopColor={look.navy} stopOpacity={0} />
+              <stop offset="0.63" stopColor={look.navy} stopOpacity={1} />
+            </>
+          ) : (
+            <>
+              <stop offset="0" stopColor={look.navy} stopOpacity={0} />
+              <stop offset="1" stopColor={look.navy} stopOpacity={0.95} />
+            </>
+          )}
         </linearGradient>
         <linearGradient id={`hf${uid}`} gradientUnits="userSpaceOnUse" x1={0} y1={fade[0]} x2={0} y2={fade[1]}>
           <stop offset="0" stopColor="#fff" />
@@ -229,7 +254,15 @@ export const PenguinRig: React.FC<Props> = ({body, bodyId, heads, head, pose = {
       })}
       <g transform={upperT}>
         <ShadedPart id={`${uid}t`} part={torso} look={look} light={rotV(Lb, -lean)} shade={W.torso} rim={RIM.torso} flat={flat} navy={`url(#navy${uid})`} />
+        {(body.seams?.torso ?? []).length ? (
+          <polyline points={(body.seams?.torso ?? []).map((q) => q.join(',')).join(' ')} fill="none" stroke={look.line ?? look.ink} strokeWidth={LINE} strokeLinecap="round" strokeLinejoin="round" />
+        ) : null}
       </g>
+      {body.parts.flipperNear ? (
+        <g transform={`${upperT} rotate(${f2(pose.flipper ?? 0)} ${f2(J.shoulderNear[0])} ${f2(J.shoulderNear[1])})`}>
+          <ShadedPart id={`${uid}fn`} part={body.parts.flipperNear} look={look} light={rotV(Lb, -(lean + (pose.flipper ?? 0)))} shade={W.torso * 0.5} rim={RIM.torso} flat={flat} navy={`url(#navy${uid})`} />
+        </g>
+      ) : null}
       <g transform={neckT}>
         <g mask={`url(#hm${uid})`}>
           <g transform={regT}>
@@ -246,7 +279,7 @@ export const Part: React.FC<{part: SheetPart; look: RigLook}> = ({part, look}) =
   <>
     <path d={part.fill} fill={look.white} fillRule="evenodd" />
     <path d={part.mass} fill={look.ink} fillRule="evenodd" />
-    <path d={part.lines} fill={look.ink} fillRule="evenodd" />
+    <path d={part.lines} fill={look.line ?? look.ink} fillRule="evenodd" />
   </>
 );
 
@@ -275,7 +308,7 @@ const ShadedPart: React.FC<ShadeProps & {part: SheetPart; navy?: string}> = ({id
           <g clipPath={`url(#m${id})`}>{rect(navy)}</g>
         </>
       ) : null}
-      {flat ? null : (
+      {flat || (shade <= 0 && rim <= 0) ? null : (
         <>
           <defs>
             <mask id={`a${id}`} maskUnits="userSpaceOnUse" x={box.x} y={box.y} width={box.w} height={box.h}>
@@ -297,9 +330,11 @@ const ShadedPart: React.FC<ShadeProps & {part: SheetPart; navy?: string}> = ({id
           <g mask={`url(#a${id})`} style={{mixBlendMode: 'multiply'}}>
             <g mask={`url(#b${id})`}>{rect(look.shade)}</g>
           </g>
-          <g mask={`url(#r${id})`} style={{mixBlendMode: 'screen'}}>
-            {rect(look.rim)}
-          </g>
+          {rim > 0 ? (
+            <g mask={`url(#r${id})`} style={{mixBlendMode: 'screen'}}>
+              {rect(look.rim)}
+            </g>
+          ) : null}
         </>
       )}
     </g>
@@ -314,7 +349,7 @@ const Shaded: React.FC<ShadeProps & {d: string}> = ({id, d, look, light, shade, 
   const rect = (fill: string) => <rect x={big.x} y={big.y} width={big.w} height={big.h} fill={fill} />;
   return (
     <g>
-      <path d={d} fill={look.white} stroke={look.ink} strokeWidth={LINE} strokeLinejoin="round" />
+      <path d={d} fill={look.white} stroke={look.line ?? look.ink} strokeWidth={LINE} strokeLinejoin="round" />
       {flat ? null : (
         <>
           <defs>
@@ -330,10 +365,12 @@ const Shaded: React.FC<ShadeProps & {d: string}> = ({id, d, look, light, shade, 
           <g mask={`url(#b${id})`} style={{mixBlendMode: 'multiply'}}>
             {rect(look.shade)}
           </g>
-          <g mask={`url(#r${id})`} style={{mixBlendMode: 'screen'}}>
-            {rect(look.rim)}
-          </g>
-          <path d={d} fill="none" stroke={look.ink} strokeWidth={LINE} strokeLinejoin="round" />
+          {rim > 0 ? (
+            <g mask={`url(#r${id})`} style={{mixBlendMode: 'screen'}}>
+              {rect(look.rim)}
+            </g>
+          ) : null}
+          <path d={d} fill="none" stroke={look.line ?? look.ink} strokeWidth={LINE} strokeLinejoin="round" />
         </>
       )}
     </g>

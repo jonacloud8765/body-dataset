@@ -24,4 +24,6 @@ export type RigPose = {
   squash?: number;
   /** whole-figure rotation around the pelvis, degrees (falls, slides, dives) */
   spin?: number;
+  /** near flipper swing at the shoulder, degrees (positive swings the tip back) */
+  flipper?: number;
 };

@@ -31,6 +31,8 @@ export type SheetBody = {
   legs: Record<string, LegMeasure>;
   /** where a head blends into the neck: [opaque above, gone below], body frame y */
   fade: {own: [number, number]; sheet: [number, number]};
+  /** outlines drawn on a part where a cut-out part (a flipper) used to cover it */
+  seams?: Record<string, [number, number][]>;
 };
 export type LegMeasure = {
   top: {x: number; y: number; w: number};
