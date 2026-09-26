@@ -70,3 +70,21 @@ npm run film:share                 # out/im-the-penguin-film.mp4: a ~25 MB copy 
 - `node scripts/walk-paces.ts` (via esbuild, see its header) lists every walk in the blocking and
   the stride it needs.
 - The traced art stays local: `public/art/` is never committed.
+
+## The interview clip
+
+A standalone clip in the film's universe: the documentary's director interviews a penguin
+scientist on a rocky outcrop above the colony. Its audio, the reference images of the scientist and
+the timing derived from the audio stay local (`source/interview/`, `app/public/audio/`).
+
+```
+node scripts/render.mjs Interview out/interview-1080p.mp4 --audio ../source/interview/interview.mp3 --crf=18
+```
+
+- `src/interview/Interview.tsx` holds the edit. A wide two-shot opens; then it cuts between
+  over-the-shoulders and close-ups of whoever speaks, with listening reactions in the pauses and
+  wides over the music. The documentary's grade and handheld camera, no text.
+- The speaker turns come from the audio. Each window gets a voice embedding (Resemblyzer's encoder
+  run in NumPy) and the windows are grouped by voice. The first voice is the interviewer.
+- `src/interview/People.tsx` draws the scientist (from the references) and the director (the film's).
+  There is no lip sync: heads move with the voice.

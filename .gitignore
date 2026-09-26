@@ -170,4 +170,6 @@ penguin/source/*.jpg
 penguin/source/*.png
 penguin/source/*.pdf
 penguin/source/*.svg
+# the interview clip's audio and the subject's reference images (a real person; not ours to publish)
+penguin/source/interview/
 penguin/analysis/out/
