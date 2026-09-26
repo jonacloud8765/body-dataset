@@ -31,9 +31,20 @@ const run = (args) => {
 };
 const picture = out.replace(/\.mp4$/, '.picture.mp4');
 run(['remotion', 'render', 'src/index.ts', id, picture, '--muted', ...extra]);
-// the song is padded with silence and cut where the picture ends: the film runs past the song
-// (the silent epilogue), a clip taken from the middle of it ends before the song does
-run(['remotion', 'ffmpeg', '-v', 'error', '-y', '-i', picture, '-ss', audioFrom, '-i', song, '-map', '0:v', '-map', '1:a', '-af', 'apad', '-shortest',
+// the song is padded with silence and cut exactly where the picture ends: the film runs past the
+// song (the silent epilogue), a clip from the middle of it ends before the song does.
+// (-shortest won't do: alone it overshoots by the muxer's interleave slack, and with apad it can
+// wait forever.)
+const probe = spawnSync('npx', ['remotion', 'ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', picture], {
+  cwd: resolve(here, '..'),
+  encoding: 'utf8',
+});
+const duration = parseFloat(probe.stdout);
+if (!(duration > 0)) {
+  console.error(`could not read the picture's duration: ${probe.stderr}`);
+  process.exit(1);
+}
+run(['remotion', 'ffmpeg', '-v', 'error', '-y', '-i', picture, '-ss', audioFrom, '-i', song, '-map', '0:v', '-map', '1:a', '-af', 'apad', '-t', duration.toFixed(3),
   '-c:v', 'copy', '-c:a', 'aac', '-b:a', '320k', '-movflags', '+faststart', out]);
 rmSync(resolve(here, '..', picture));
 console.log(`wrote ${out}`);

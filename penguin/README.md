@@ -54,6 +54,7 @@ python3 scripts/trace-sheet.py     # once: traces the model sheet into public/ar
 npm run film                       # out/film-1080p.mp4, 1920x1080, 30 fps, on the song
 npm run verify -- out/film-1080p.mp4
 npm run film:stills                # stills at every cut and cue
+npm run film:share                 # out/im-the-penguin-film.mp4: a ~25 MB copy for sharing
 ```
 
 - `src/film/FilmShot.tsx` draws each shot from the animatic's blocking (`src/animatic/blocking.ts`),

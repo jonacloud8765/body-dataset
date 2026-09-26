@@ -12,7 +12,8 @@
     "animatic:stills": "npm run audio && node scripts/cut-stills.mjs",
     "verify": "python3 scripts/verify-render.py",
     "film": "npm run audio && node scripts/render.mjs Film out/film-1080p.mp4 --crf=18",
-    "film:stills": "npm run audio && node scripts/cut-stills.mjs --comp Film --clean --out out/film-stills"
+    "film:stills": "npm run audio && node scripts/cut-stills.mjs --comp Film --clean --out out/film-stills",
+    "film:share": "remotion ffmpeg -v error -y -i out/film-1080p.mp4 -c:v libx264 -preset slow -tune animation -crf 21 -pix_fmt yuv420p -c:a aac -b:a 192k -movflags +faststart out/im-the-penguin-film.mp4"
   },
   "dependencies": {
     "@remotion/cli": "4.0.529",
