@@ -180,7 +180,6 @@ export const Plaza: React.FC<PlazaProps> = ({cam, sun = 0, night = 0, wallLayer,
           {overlayLayer}
         </g>
         <g transform={camTransform(cam, 1.35)} opacity={fgOpacity}>
-          <rect x={-220} y={930} width={34} height={90} rx={8} fill="#0D1013" />
         </g>
         {night > 0 ? <rect width={W} height={H} fill={C.INK} opacity={night} /> : null}
       </svg>

@@ -287,10 +287,10 @@ export const S10PerceivedStrength: React.FC<SceneProps> = ({T0}) => {
         </g>
       </WorldLayer>
       <Matte />
-      <div style={{position: 'absolute', left: W / 2, top: 230, transform: 'translate(-50%, -50%)', width: 1300, textAlign: 'center', fontSize: 50, lineHeight: 1.25, color: C.BONE, fontVariationSettings: "'wght' 430", opacity: p(t, 1.2, 2.2) * (1 - p(t, 7.6, 8.3))}}>
+      <div style={{position: 'absolute', left: W / 2, top: 230, transform: 'translate(-50%, -50%)', width: 1300, textAlign: 'center', fontSize: 50, lineHeight: 1.25, color: C.BONE, fontVariationSettings: "'wght' 430", opacity: p(t, 1.2, 2.2) * (1 - p(t, 5.0, 5.6))}}>
         “The appearance of strength is as important, in many cases, as strength itself.”
       </div>
-      <Tag text="The threat reacts to what it perceives." t={t - 5.6} x={W / 2} y={232} out={p(t, 7.6, 8.2)} color={C.BONE} size={34} />
+      <Tag text="The threat reacts to what it perceives." t={t - 5.9} x={W / 2} y={232} out={p(t, 7.6, 8.2)} color={C.BONE} size={34} />
       <Tag text="Animals do it too." t={t - 8.8} x={W / 2} y={232} out={p(t, 10.6, 11.2)} color={C.BONE} size={34} />
       <Caption text="Posture works on perception, not on actual strength." t={t} a={4.4} b={8.2} />
       <Caption text="Signals like these are how we read each other: who is harmless, who is dangerous." t={t} a={11.6} b={16.8} />
