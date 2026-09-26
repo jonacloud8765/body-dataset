@@ -20,7 +20,7 @@ export const makeResolver = (shot: Shot) => (w: When): number => {
 
 const ease = Easing.inOut(Easing.cubic);
 
-const lerpKeys = <T extends {at: When}>(
+export const lerpKeys = <T extends {at: When}>(
   keys: T[],
   f: number,
   res: (w: When) => number,
@@ -44,7 +44,7 @@ const lerpKeys = <T extends {at: When}>(
   return pts[pts.length - 1].v;
 };
 
-const latest = <T extends {at: When}, K extends keyof T>(keys: T[], f: number, res: (w: When) => number, field: K, fallback: T[K]): T[K] => {
+export const latest = <T extends {at: When}, K extends keyof T>(keys: T[], f: number, res: (w: When) => number, field: K, fallback: T[K]): T[K] => {
   let v = fallback;
   let best = -Infinity;
   for (const k of keys) {
@@ -57,7 +57,7 @@ const latest = <T extends {at: When}, K extends keyof T>(keys: T[], f: number, r
   return v;
 };
 
-const moveOffset = (m: Move | undefined, f: number, res: (w: When) => number) => {
+export const moveOffset = (m: Move | undefined, f: number, res: (w: When) => number) => {
   if (!m) return {dx: 0, dy: 0};
   const [a, b] = m.at ?? [0, 1];
   const t = interpolate(f, [res(a), Math.max(res(a) + 1, res(b))], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: ease});
@@ -79,7 +79,7 @@ export const skyAt = (spec: SkySpec | undefined, f: number, res: (w: When) => nu
   return mixSky(SKY[spec.from], SKY[spec.to], t);
 };
 
-const camTransform = (keys: CamKey[] | undefined, f: number, res: (w: When) => number, extra: {x: number; y: number; roll: number}) => {
+export const camTransform = (keys: CamKey[] | undefined, f: number, res: (w: When) => number, extra: {x: number; y: number; roll: number}) => {
   const k = keys ?? [];
   const zoom = lerpKeys(k, f, res, 'zoom', 1);
   const x = lerpKeys(k, f, res, 'x', 0) + extra.x;
@@ -532,7 +532,7 @@ const renderEl = (el: El, i: number, c: Ctx): React.ReactNode => {
   }
 };
 
-const MapGraphic: React.FC<{res: (w: When) => number; f: number}> = ({res, f}) => {
+export const MapGraphic: React.FC<{res: (w: When) => number; f: number}> = ({res, f}) => {
   const draw = interpolate(f, [0, 30], [0, 1], {extrapolateRight: 'clamp'});
   const measure = interpolate(f, [res('1.3'), res('2.2')], [0, 1], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
   const stamp = f >= res('2.2');
@@ -583,7 +583,7 @@ const MapGraphic: React.FC<{res: (w: When) => number; f: number}> = ({res, f}) =
   );
 };
 
-const EndCard: React.FC<{f: number}> = ({f}) => {
+export const EndCard: React.FC<{f: number}> = ({f}) => {
   const l1 = 'The penguin was not seen again.';
   const l2 = 'Neither was the mountain.';
   const n1 = Math.max(0, Math.min(l1.length, Math.floor((f - 12) / 2)));

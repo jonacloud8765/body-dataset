@@ -26,4 +26,6 @@ export type RigPose = {
   spin?: number;
   /** near flipper swing at the shoulder, degrees (positive swings the tip back) */
   flipper?: number;
+  /** which way the knees bend: +1 forward (walking), -1 backward (legs trailing in a dive) */
+  bend?: number;
 };

@@ -22,6 +22,8 @@ export type WalkOpts = {
   drop?: number;
   /** forward lean, degrees */
   lean?: number;
+  /** the ground rises this many degrees toward where he's going (climbing) */
+  slope?: number;
 };
 
 export const WALK_STRIDE = 70;
@@ -42,6 +44,7 @@ export const walkPose = (body: SheetBody, view: '34' | 'front', beats: number, o
   const lift = o.lift ?? 12;
   const drop = o.drop ?? 8;
   const lean = o.lean ?? 3;
+  const rise = Math.tan(((o.slope ?? 0) * Math.PI) / 180);
   const restA = footLine(body, view, 'A');
   const restB = footLine(body, view, 'B');
 
@@ -70,8 +73,11 @@ export const walkPose = (body: SheetBody, view: '34' | 'front', beats: number, o
     return {pos: [x, y], angle};
   };
 
-  const a = foot(restA, legPhase(1));
-  const b = foot(restB, legPhase(0));
+  // on a slope, a foot ahead of its rest spot sits higher, and lies along the slope
+  const onSlope = (rest: Vec, f: {pos: Vec; angle: number}) =>
+    rise ? {pos: [f.pos[0], f.pos[1] - (f.pos[0] - rest[0]) * rise] as Vec, angle: f.angle - (o.slope ?? 0)} : f;
+  const a = onSlope(restA, foot(restA, legPhase(1)));
+  const b = onSlope(restB, foot(restB, legPhase(0)));
 
   // the body: down just after each footfall, up just before the next
   const u = ((beats % 1) + 1) % 1;

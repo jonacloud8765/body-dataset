@@ -68,9 +68,9 @@ export const FlatSky: React.FC<{
 );
 
 // ─── distant ranges ────────────────────────────────────────────────────────
-export const FlatRanges: React.FC<{P: WorldPalette; horizon: number; pan?: number; seed?: string}> = ({P, horizon, pan = 0, seed = 'r'}) => {
-  const far = range(horizon + 1, 30, `${seed}far`, -300, 2220);
-  const mid = range(horizon + 2, 16, `${seed}mid`, -300, 2220, 10);
+export const FlatRanges: React.FC<{P: WorldPalette; horizon: number; pan?: number; seed?: string; amp?: number}> = ({P, horizon, pan = 0, seed = 'r', amp = 30}) => {
+  const far = range(horizon + 1, amp, `${seed}far`, -300, 2220);
+  const mid = range(horizon + 2, amp * 0.53, `${seed}mid`, -300, 2220, 10);
   return (
     <g>
       <path d={poly(far.map(([x, y]) => [x + pan * 0.02, y] as Pt))} fill={P.range[0]} />
@@ -99,7 +99,9 @@ export const FlatMountain: React.FC<{
   flip?: number;
   /** a thin outline, for close shots */
   line?: boolean;
-}> = ({id, P, x, y, h, sun, haze = 0, eyes = 'none', rim = 0, plume = -1, flip = 1, line = false}) => {
+  /** against the sun: one dark shape */
+  dark?: boolean;
+}> = ({id, P, x, y, h, sun, haze = 0, eyes = 'none', rim = 0, plume = -1, flip = 1, line = false, dark = false}) => {
   const s = h / 100;
   const out = roughen(MOUNTAIN, s, 'mtn', 1.8);
   const snow = roughen(SNOWFIELD, s, 'snow', 2.6, 1.6);
@@ -109,8 +111,24 @@ export const FlatMountain: React.FC<{
   const shadeSide = side(lightRight ? -1 : 1);
   const litSide = side(lightRight ? 1 : -1);
   const outline = smooth(out, true, 0.3);
+  const edge = smooth(out, false, 0.3);
   const snowPath = smooth(snow, true, 0.35);
   const g = gullies(s, 'gul', 10);
+  // seen up close, the rock has bands and the snow has wind marks (mountain units, so they scale)
+  const detail = h > 300 && !dark;
+  const lens = (cx: number, cy: number, len: number, th: number, ang: number) => {
+    const r = (ang * Math.PI) / 180;
+    const c = Math.cos(r);
+    const sn = Math.sin(r);
+    const p = (u: number, v: number) => `${((cx + u * c - v * sn) * s).toFixed(1)} ${((cy + u * sn + v * c) * s).toFixed(1)}`;
+    return `M${p(-len / 2, 0)}Q${p(0, -th)} ${p(len / 2, 0)}Q${p(0, th * 0.35)} ${p(-len / 2, 0)}Z`;
+  };
+  const bands = detail
+    ? new Array(46).fill(0).map((_, i) => lens(-110 + random(`mb${i}x`) * 220, -98 + random(`mb${i}y`) * 96, 10 + random(`mb${i}l`) * 26, 0.9 + random(`mb${i}t`) * 1.8, -22 + random(`mb${i}a`) * 14))
+    : [];
+  const marks = detail
+    ? new Array(40).fill(0).map((_, i) => lens(-100 + random(`mw${i}x`) * 95, -60 + random(`mw${i}y`) * 60, 6 + random(`mw${i}l`) * 16, 0.5 + random(`mw${i}t`) * 0.9, -8 + random(`mw${i}a`) * 8))
+    : [];
   return (
     <g transform={`translate(${x} ${y}) scale(${flip} 1)`}>
       <defs>
@@ -124,15 +142,33 @@ export const FlatMountain: React.FC<{
           <path d={poly(litSide)} />
         </clipPath>
       </defs>
-      <path d={outline} fill={P.rock} />
+      <path d={outline} fill={dark ? P.rockShade : P.rock} />
+      {dark ? null : (
       <g clipPath={`url(#mc${id})`}>
         <g clipPath={`url(#ms${id})`}>
           <rect x={-140 * s} y={-120 * s} width={280 * s} height={130 * s} fill={P.rockShade} />
         </g>
+        {bands.map((d, i) => (
+          <path key={`b${i}`} d={d} fill={P.rockShade} opacity={0.75} />
+        ))}
         <path d={snowPath} fill={P.snow} />
         <g clipPath={`url(#ms${id})`}>
           <path d={snowPath} fill={P.snowShade} />
         </g>
+        {marks.length ? (
+          <g>
+            <defs>
+              <clipPath id={`mf${id}`}>
+                <path d={snowPath} />
+              </clipPath>
+            </defs>
+            <g clipPath={`url(#mf${id})`}>
+              {marks.map((d, i) => (
+                <path key={`w${i}`} d={d} fill={P.sastrugi} />
+              ))}
+            </g>
+          </g>
+        ) : null}
         <g clipPath={`url(#ml${id})`}>
           {g.map((pts, i) => (
             <path key={i} d={smooth(pts, true, 0.5)} fill={P.snow} />
@@ -160,14 +196,18 @@ export const FlatMountain: React.FC<{
         })}
         {haze > 0 ? <rect x={-140 * s} y={-120 * s} width={280 * s} height={130 * s} fill={P.sky[3]} opacity={Math.min(0.9, haze)} /> : null}
       </g>
-      {line ? <path d={outline} fill="none" stroke={P.line} strokeWidth={Math.max(1.5, h / 120)} strokeLinejoin="round" /> : null}
+      )}
+      {line ? <path d={edge} fill="none" stroke={P.line} strokeWidth={Math.max(1.5, h / 120)} strokeLinejoin="round" strokeLinecap="round" /> : null}
       {rim > 0 ? (
-        <path d={outline} fill="none" stroke="#FFB547" strokeWidth={Math.max(3, h / 60)} strokeDasharray={9000} strokeDashoffset={9000 * (1 - rim)} strokeLinejoin="round" />
+        <path d={edge} fill="none" stroke="#FFB547" strokeWidth={Math.max(3, h / 60)} strokeDasharray={9000} strokeDashoffset={9000 * (1 - rim)} strokeLinejoin="round" strokeLinecap="round" />
       ) : null}
       {plume >= 0 && plume <= 1 ? (
         <g opacity={plume < 0.8 ? 1 : 1 - (plume - 0.8) / 0.2}>
           {[0, 1, 2, 3, 4].map((i) => (
-            <circle key={i} cx={(-10 - plume * (26 + i * 18)) * s} cy={(-106 - i * 4 - plume * 10) * s} r={(7 + plume * 14 + i * 3) * s} fill={P.cloud} />
+            <circle key={`d${i}`} cx={(-10 - plume * (26 + i * 18)) * s} cy={(-104 - i * 4 - plume * 10) * s} r={(7 + plume * 14 + i * 3) * s} fill={P.snowShade} />
+          ))}
+          {[0, 1, 2, 3, 4].map((i) => (
+            <circle key={i} cx={(-10 - plume * (26 + i * 18)) * s} cy={(-106.5 - i * 4 - plume * 10) * s} r={(6.4 + plume * 13 + i * 3) * s} fill={P.snow} />
           ))}
         </g>
       ) : null}
@@ -192,10 +232,19 @@ export const FlatGround: React.FC<{
   bottom?: number;
   sparkle?: boolean;
   drifts?: boolean;
-}> = ({P, horizon, feetY, travel = 0, t, seed = 'g', bottom = H, sparkle = true, drifts = true}) => {
-  const k = (y: number) => (y - horizon) / Math.max(1, feetY - horizon);
-  const span = W + 1200;
-  const wrap = (x: number) => ((x % span) + span) % span - 600;
+  /** world x of the left edge of what the camera sees (the snow is laid out around it) */
+  x0?: number;
+  /** the camera circles the figure at feetY: the ground there stays put, farther ground slides */
+  orbit?: boolean;
+}> = ({P, horizon, feetY, travel = 0, t, seed = 'g', bottom = H, sparkle = true, drifts = true, x0 = 0, orbit = false}) => {
+  const k = (y: number) => {
+    const v = (y - horizon) / Math.max(1, feetY - horizon);
+    return orbit ? 1 - v : v;
+  };
+  // marks repeat every `span` px of world, laid out over a window that starts left of the view
+  const span = 3200;
+  const lo = x0 - 600;
+  const wrap = (x: number) => lo + ((((x - lo) % span) + span) % span);
   const strokes = new Array(120).fill(0).map((_, i) => {
     const depth = Math.pow(random(`${seed}d${i}`), 1.6);
     const y = horizon + 4 + depth * (bottom - horizon);
@@ -209,15 +258,15 @@ export const FlatGround: React.FC<{
         const y = horizon + Math.pow(u, 1.5) * (bottom - horizon);
         const thick = 5 + u * 36;
         const pts: Pt[] = [];
-        for (let xx = -700; xx <= W + 700; xx += 60) pts.push([xx, y + fbm1((xx + travel * k(y)) / 420, `${seed}dr${i}`) * thick]);
+        for (let xx = Math.floor((x0 - 700) / 60) * 60; xx <= x0 + W / 0.8 + 700; xx += 60) pts.push([xx, y + fbm1((xx + travel * k(y)) / 420, `${seed}dr${i}`) * thick]);
         const lower = pts.map(([px, py]) => [px, py + thick * (0.6 + 0.4 * fbm1(px / 300 + 7, `${seed}dl${i}`))] as Pt).reverse();
         return smooth([...pts, ...lower], true, 0.4);
       })
     : [];
   return (
     <g>
-      <rect x={-400} y={horizon} width={W + 800} height={bottom - horizon + 400} fill={P.snow} />
-      <rect x={-400} y={horizon} width={W + 800} height={16} fill={P.snowShade} opacity={0.5} />
+      <rect x={x0 - 800} y={horizon} width={W / 0.8 + 1600} height={bottom - horizon + 600} fill={P.snow} />
+      <rect x={x0 - 800} y={horizon} width={W / 0.8 + 1600} height={16} fill={P.snowShade} opacity={0.5} />
       {bands.map((d, i) => (
         <path key={i} d={d} fill={P.snowShade} opacity={0.45} />
       ))}

@@ -18,6 +18,8 @@ export type PenguinKey = {
   facing?: 1 | -1;
   pose?: Pose;
   headTurn?: number;
+  /** film: the expression from this key on (a sheet head id) */
+  head?: string;
 };
 
 export type CamKey = {at: When; zoom?: number; x?: number; y?: number; roll?: number};
@@ -27,10 +29,10 @@ export type Move = {x?: number; y?: number; at?: [When, When]};
 export type SkySpec = Tod | {from: Tod; to: Tod; at: When; over: When} | 'timelapse';
 
 export type El =
-  | {k: 'ground'; y: number; marks?: 'sastrugi' | 'none'; scroll?: number; line?: boolean; color?: string}
+  | {k: 'ground'; y: number; marks?: 'sastrugi' | 'none'; scroll?: number; line?: boolean; color?: string; feetY?: number; sparkle?: boolean}
   | {k: 'mountain'; x: number; y: number; h: number; haze?: number; eyes?: {at: When; state: EyeState}[]; plumes?: When[]; rim?: [When, When]; dark?: boolean; move?: Move; turnAt?: When}
-  | {k: 'penguin'; keys: PenguinKey[]; walk?: 'every' | 'half' | 'double'; sing?: boolean; counterRoll?: boolean}
-  | {k: 'crew'; x: number; y: number; h: number; role: Role; facing?: 1 | -1; walk?: boolean; sink?: number; look?: 'ahead' | 'up'; move?: Move}
+  | {k: 'penguin'; keys: PenguinKey[]; walk?: 'every' | 'half' | 'double'; sing?: boolean; counterRoll?: boolean; head?: string; stride?: number; prints?: boolean; shadow?: boolean; rate?: number}
+  | {k: 'crew'; x: number; y: number; h: number; role: Role; facing?: 1 | -1; walk?: boolean; sink?: number; look?: 'ahead' | 'up'; move?: Move; sign?: When; carry?: [When, When]; lean?: number}
   | {k: 'colony'; x: number; y: number; w: number; ph: number; rows: number; cols: number; hero?: [number, number]; seed?: number; waveAt?: When; turns?: {at: When; until: When; col: number}[]; blur?: number}
   | {k: 'feet'; x: number; y: number; size: number; stepAt?: When}
   | {k: 'print'; x: number; y: number; size: number}
@@ -57,6 +59,7 @@ export type El =
   | {k: 'pip'; x: number; y: number; w: number; h: number; at: When; frames: number; els: El[]}
   | {k: 'camp'; x: number; y: number; s: number}
   | {k: 'group'; els: El[]; move?: Move; clipY?: number; fade?: [When, When]}
+  | {k: 'legs'; xs: number[]; y: number; top: number; w: number; facing?: 1 | -1; turnAt?: When}
   | {k: 'map'}
   | {k: 'endcard'};
 
@@ -81,4 +84,6 @@ export type Spec = {
   shakeOnDownbeat?: boolean;
   /** Freeze the picture for the last N frames (the battery dies). */
   freezeLast?: number;
+  /** film: the sun or moon on screen (null = none), and so the light on the figures */
+  sun?: {x: number; y: number} | null;
 };

@@ -113,9 +113,16 @@ type Props = {
   look?: RigLook;
   /** skip the cel shading (tiny figures) */
   flat?: boolean;
+  /**
+   * 'forward': the far foot is drawn with the near foot's drawing, toes pointing where he's going
+   * (walking, profile). 'sheet': the sheet's own 3/4 stance, far foot splayed out.
+   */
+  farFoot?: 'forward' | 'sheet';
+  /** the head turned to look back over his shoulder (mirrored at the neck) */
+  headFlip?: boolean;
 };
 
-export const PenguinRig: React.FC<Props> = ({body, bodyId, heads, head, pose = {}, x, y, h, facing = 1, light = [0.95, -0.3], look = ANIME_LOOK, flat}) => {
+export const PenguinRig: React.FC<Props> = ({body, bodyId, heads, head, pose = {}, x, y, h, facing = 1, light = [0.95, -0.3], look = ANIME_LOOK, flat, farFoot = 'forward', headFlip = false}) => {
   const uid = useId().replace(/[^a-zA-Z0-9]/g, '');
   const s = h / body.height;
   const J = body.joints;
@@ -145,9 +152,14 @@ export const PenguinRig: React.FC<Props> = ({body, bodyId, heads, head, pose = {
   // light, as a unit vector in the body frame (the rig may be mirrored)
   const Lb: Vec = [light[0] * facing, light[1]];
 
+  // the sheet's 3/4 far foot splays out backward; walking, both feet point the way he's going
+  const fwd = side && farFoot === 'forward';
+  // the forward foot is drawn standing 10 px above the sheet's baseline (the other foot reaches
+  // it): on his feet, he stands that much lower so both soles are on the snow
+  const sole = fwd && !pose.spin ? 10 : 0;
   const legs = [
-    {m: mA, hip: upper(hipA0), ankle: spinP(pose.ankleA ?? ankA0), hip0: hipA0, ank0: ankA0, foot: body.parts[`foot${kA}`], footAngle: (pose.footA ?? 0) + spin, bend: 1, flat: side ? 1 : 0.25},
-    {m: mB, hip: upper(hipB0), ankle: spinP(pose.ankleB ?? ankB0), hip0: hipB0, ank0: ankB0, foot: body.parts[`foot${kB}`], footAngle: (pose.footB ?? 0) + spin, bend: 1, flat: side ? 1 : 0.25},
+    {m: mA, hip: upper(hipA0), ankle: pose.ankleA ?? spinP(ankA0), hip0: hipA0, ank0: ankA0, foot: body.parts[fwd ? `foot${kB}` : `foot${kA}`], footAnk0: fwd ? ankB0 : ankA0, footAngle: pose.footA ?? spin, bend: pose.bend ?? 1, flat: side ? 1 : 0.25},
+    {m: mB, hip: upper(hipB0), ankle: pose.ankleB ?? spinP(ankB0), hip0: hipB0, ank0: ankB0, foot: body.parts[`foot${kB}`], footAnk0: ankB0, footAngle: pose.footB ?? spin, bend: pose.bend ?? 1, flat: side ? 1 : 0.25},
   ];
 
   const legShapes = (L: (typeof legs)[number]) => {
@@ -195,7 +207,7 @@ export const PenguinRig: React.FC<Props> = ({body, bodyId, heads, head, pose = {
     const pants = tube(pantsPts, pantsAcc.map(wAt));
     const ankPts = [lerp(hem.p, pts[Math.min(pts.length - 1, hem.i)], -0.6), hem.p, ...pts.slice(hem.i)];
     const ankle = tube(ankPts, ankPts.map(() => L.m.ankle.w - LINE));
-    const footT = `translate(${f2(L.ankle[0])} ${f2(L.ankle[1])}) rotate(${f2(L.footAngle)}) translate(${f2(-L.ank0[0])} ${f2(-L.ank0[1])})`;
+    const footT = `translate(${f2(L.ankle[0])} ${f2(L.ankle[1])}) rotate(${f2(L.footAngle)}) translate(${f2(-L.footAnk0[0])} ${f2(-L.footAnk0[1])})`;
     return {pants, ankle, footT};
   };
 
@@ -214,7 +226,7 @@ export const PenguinRig: React.FC<Props> = ({body, bodyId, heads, head, pose = {
   const RIM = look.rim_;
 
   return (
-    <g transform={`translate(${f2(x)} ${f2(y)}) scale(${f2(s * facing)} ${f2(s)})`} style={{isolation: 'isolate'}}>
+    <g transform={`translate(${f2(x)} ${f2(y)}) scale(${f2(s * facing)} ${f2(s)}) translate(0 ${sole})`} style={{isolation: 'isolate'}}>
       <defs>
         <linearGradient id={`navy${uid}`} gradientUnits="userSpaceOnUse" x1={0} y1={navyTop} x2={0} y2={navyBottom}>
           {look.hardNavy ? (
@@ -263,7 +275,7 @@ export const PenguinRig: React.FC<Props> = ({body, bodyId, heads, head, pose = {
           <ShadedPart id={`${uid}fn`} part={body.parts.flipperNear} look={look} light={rotV(Lb, -(lean + (pose.flipper ?? 0)))} shade={W.torso * 0.5} rim={RIM.torso} flat={flat} navy={`url(#navy${uid})`} />
         </g>
       ) : null}
-      <g transform={neckT}>
+      <g transform={headFlip ? `${neckT} translate(${f2(J.neck[0])} 0) scale(-1 1) translate(${f2(-J.neck[0])} 0)` : neckT}>
         <g mask={`url(#hm${uid})`}>
           <g transform={regT}>
             <ShadedPart id={`${uid}h`} part={headPart} look={look} light={rotV(Lb, -(lean + tilt))} shade={W.head / (reg?.s ?? 1)} rim={RIM.head / (reg?.s ?? 1)} flat={flat} />

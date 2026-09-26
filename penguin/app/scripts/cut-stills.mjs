@@ -22,24 +22,27 @@ const only = opt('shots', '')
   .filter(Boolean);
 const scale = Number(opt('scale', '0.5'));
 const clean = args.includes('--clean');
+const compId = opt('comp', 'Animatic');
+const midOnly = args.includes('--mid');
 
 const timeline = JSON.parse(readFileSync(resolve(here, '../../storyboard/timeline.json'), 'utf8'));
 const shots = timeline.shots.filter((s) => !only.length || only.includes(s.id));
 
 const framesFor = (s) => {
+  if (midOnly) return [s.from + Math.floor(s.frames / 2)];
   const f = new Set([s.from + 1, s.from + Math.floor(s.frames / 2), s.to - 1]);
   for (const b of s.beats ?? []) f.add(Math.min(s.to - 1, s.from + b.frame + 2));
   return [...f].sort((a, b) => a - b);
 };
 
-const out = resolve(here, '../out/stills');
+const out = resolve(here, '..', opt('out', 'out/stills'));
 mkdirSync(out, {recursive: true});
 const browserExecutable =
   process.env.REMOTION_BROWSER ?? '/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell';
 
 const serveUrl = await bundle({entryPoint: resolve(here, '../src/index.ts'), publicDir: resolve(here, '../public')});
 const inputProps = {hud: !clean};
-const composition = await selectComposition({serveUrl, id: 'Animatic', inputProps, browserExecutable, chromiumOptions: {gl: 'angle'}});
+const composition = await selectComposition({serveUrl, id: compId, inputProps, browserExecutable, chromiumOptions: {gl: 'angle'}});
 
 let n = 0;
 for (const s of shots) {

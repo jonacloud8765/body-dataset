@@ -11,6 +11,11 @@
 
 > **Logline.** A lone penguin walks seventy kilometers inland toward a mountain nobody else will look at, while a documentary crew keeps trying to interrupt him. He knows where he is going. When he gets there, the mountain opens its eyes.
 
+> **Changes since v1.0 (the director's calls).**
+> - **Look: flat 2D.** Flat fills, the model sheet's own ink line, no rim light, no gradients except the sky. Colors come from each hour's palette (`app/src/world/palette.ts`), and night and dawn tint the figures too.
+> - **No lip sync.** His beak stays closed when he sings. The singing reads through his posture, the head drawings and the camera. The mouth shapes (§6.4), `mouths.py`, the mouth timeline (§15) and the lip sync check (§16) no longer apply. S30 is still the first time he faces the documentary's lens.
+> - **The walk.** Every footfall lands on the beat and leaves a print in the snow. When a move is too fast for his natural stride, he steps on the half beats.
+
 **The package**
 
 | File | What it is |
@@ -1223,7 +1228,7 @@ A render configuration like the earlier explainer project's: the pre-installed h
 |---|---|
 | Cuts | Every cut is within ±1 frame of its bar.beat |
 | Footfalls | Every walking contact frame is within ±1 frame of a beat |
-| Lip sync | In singing shots the beak opens 0–2 frames before each sung onset. It stays closed in every DOC shot except S30 and in every shot outside the singing list. |
+| Lip sync | None, by the director's call: the beak stays closed in every shot. |
 | Model | Every view, head and mouth matches the sheet overlay: proportions (§1.7), markings, the paper beak, the navy only on flippers and tail |
 | Screen direction | The mountain is right or ahead in every exterior. He faces left only in S10, S28 and S29; his head turns back without his body in S31 and S51. |
 | Mountain | Its stage in each shot matches §7.1, and it never shrinks between consecutive sections |
