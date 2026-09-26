@@ -30,7 +30,7 @@ export const POSES = {
   guard: {...base, lean: 11, head: 4, shN: 38, elN: 118, shF: 30, elF: 124, hipN: 18, knN: 16, hipF: -16, knF: 14},
   frozen: {...base, lean: 2, head: 6, shN: 12, elN: 22, shF: -10, elF: 18, hipN: 14, knN: 6, hipF: -12, knF: 10},
   posture: {...base, lean: -7, head: -10, shN: 84, elN: 6, shF: 18, elF: 30, hipN: 21, knN: 4, hipF: -21, knF: 4, expand: 1},
-  submit: {...base, lean: 32, head: 34, shN: 40, elN: 24, shF: 30, elF: 30, hipN: 88, knN: 150, hipF: 5, knF: 118},
+  submit: {...base, lean: 24, head: 36, shN: 18, elN: 46, shF: 10, elF: 40, hipN: 82, knN: 86, hipF: -4, knF: 96},
   sit: {...base, lean: -4, shN: 20, elN: 60, shF: 16, elF: 56, hipN: 86, knN: 88, hipF: 80, knF: 84, sit: 1},
   shield: {...base, lean: 6, head: 0, shN: 52, elN: 40, shF: 40, elF: 60, hipN: 20, knN: 14, hipF: -18, knF: 12, expand: 0.4},
 } satisfies Record<string, Pose>;
