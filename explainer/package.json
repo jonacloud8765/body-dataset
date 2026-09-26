@@ -10,7 +10,8 @@
     "audio:ensure": "node -e \"require('fs').existsSync('public/audio/soundtrack.wav')||process.exit(1)\" || npm run audio",
     "still": "remotion still src/index.ts",
     "render": "npm run audio:ensure && remotion render src/index.ts CalmButReady out/calm-but-ready.mp4",
-    "render:preview": "npm run audio:ensure && remotion render src/index.ts CalmButReady out/calm-but-ready-540p.mp4 --scale=0.5"
+    "render:preview": "npm run audio:ensure && remotion render src/index.ts CalmButReady out/calm-but-ready-540p.mp4 --scale=0.5",
+    "vo": "tsx scripts/export-vo.ts"
   },
   "dependencies": {
     "@remotion/cli": "4.0.529",

@@ -10,7 +10,7 @@ import {DistanceLine, GroundRing, IntentWedge, Matte, SoundArcs} from '../compon
 import {ResponseCompass, ResponseId} from '../components/Compass';
 import {Behavior, Label, Slate, Tag} from '../components/Type';
 import {S} from '../score';
-import {BRANCH_CAM, Caption, OTHER_X, PROTAGONIST_X, SceneProps, WorldLayer, heartAt, useTimes} from './common';
+import {BRANCH_CAM, OTHER_X, PROTAGONIST_X, SceneProps, WorldLayer, heartAt, useTimes} from './common';
 import {branchStatic} from './Act1Open';
 
 const LANE = WORLD.lane.main;
@@ -26,7 +26,6 @@ type BranchSpec = {
   label: string;
   labelAt: number;
   tags: {text: string; at: number}[];
-  captions: {text: string; a: number; b: number}[];
   prot: (b: number) => Actor;
   other: (b: number) => OtherActor;
   cam?: (b: number) => Cam;
@@ -84,9 +83,6 @@ const BranchScene: React.FC<SceneProps & {spec: BranchSpec; D: number}> = ({T0, 
       {spec.tags.map((g, i) => (
         <Tag key={i} text={g.text} t={t - g.at} x={W / 2} y={312 + i * 46} out={labelOut} size={i === 0 ? 32 : 26} color={i === 0 ? C.BONE : C.MIST} />
       ))}
-      {spec.captions.map((c, i) => (
-        <Caption key={i} text={c.text} t={t} a={c.a} b={c.b} />
-      ))}
     </AbsoluteFill>
   );
 };
@@ -102,7 +98,6 @@ const FIGHT: BranchSpec = {
     {text: 'Confront the threat directly', at: 4.5},
     {text: 'Can be adaptive when trained and appropriate', at: 5.4},
   ],
-  captions: [{text: 'Fight: move toward the threat and confront it.', a: 1, b: 7.8}],
   prot: (b) => {
     const k = p(b, 0.2, 3.1, EASE);
     const x = lerp(PROTAGONIST_X, OTHER_X - 150, k);
@@ -133,7 +128,6 @@ const FLIGHT: BranchSpec = {
     {text: 'Escape. Create distance.', at: 4.0},
     {text: 'Survival-oriented; common when escape is possible', at: 4.9},
   ],
-  captions: [{text: 'Flight: move away and increase the distance.', a: 1, b: 8.8}],
   prot: (b) => {
     const turn = p(b, 0, 0.5);
     const k = p(b, 0.5, 7.5, (x) => x * (0.6 + 0.4 * x));
@@ -166,11 +160,6 @@ const FREEZE: BranchSpec = {
     {text: 'Can conceal, or wait for an opening', at: 5.6},
     {text: 'Dangerous if it lasts too long', at: 9.6},
   ],
-  captions: [
-    {text: 'Freeze: the body stops, while the world keeps moving.', a: 0.8, b: 5.2},
-    {text: 'Sometimes stillness hides you, or buys time.', a: 5.4, b: 9.0},
-    {text: 'Held too long, the opening closes. It can follow sensory overload.', a: 9.2, b: 13.2},
-  ],
   prot: (b) => ({x: PROTAGONIST_X, pose: START_POSE, facing: 1, ring: 78, opacity: 1 - 0.45 * p(b, 4.6, 5.6) * (1 - p(b, 8.4, 9.2)), outline: p(b, 0.4, 1.4) * 0.8}),
   other: (b) => {
     const adv = p(b, 8.6, 12, LINEAR);
@@ -202,7 +191,6 @@ const SUBMIT: BranchSpec = {
     {text: 'Yield. Give control to the threat.', at: 3.7},
     {text: 'Passive surrender or appeasement', at: 4.6},
   ],
-  captions: [{text: 'Submit: lower, yield, hand control to the threat.', a: 1, b: 7.8}],
   prot: (b) => {
     const k = p(b, 0.2, 2.4, EASE);
     return {x: PROTAGONIST_X, pose: mixPose(START_POSE, POSES.submit, k), facing: 1, ring: lerp(78, 34, k), grow: lerp(1, 0.72, k)};
@@ -222,10 +210,6 @@ const POSTURE: BranchSpec = {
     {text: 'Signal strength to deter the threat', at: 3.8},
     {text: 'Voice · stance · visible resistance', at: 4.8},
     {text: 'Can prevent actual violence', at: 8.2},
-  ],
-  captions: [
-    {text: 'Posture: look bigger, sound firm, show resistance.', a: 1, b: 6.8},
-    {text: 'Often seen in humans and animals, it can stop violence before it starts.', a: 7.0, b: 12.4},
   ],
   prot: (b) => {
     const k = p(b, 0.3, 1.5, EASE_OUT);
@@ -292,8 +276,6 @@ export const S10PerceivedStrength: React.FC<SceneProps> = ({T0}) => {
       </div>
       <Tag text="The threat reacts to what it perceives." t={t - 5.9} x={W / 2} y={232} out={p(t, 7.6, 8.2)} color={C.BONE} size={34} />
       <Tag text="Animals do it too." t={t - 8.8} x={W / 2} y={232} out={p(t, 10.6, 11.2)} color={C.BONE} size={34} />
-      <Caption text="Posture works on perception, not on actual strength." t={t} a={4.4} b={8.2} />
-      <Caption text="Signals like these are how we read each other: who is harmless, who is dangerous." t={t} a={11.6} b={16.8} />
       <Slate text="II · THE ROLES" t={t - 14.6} />
     </AbsoluteFill>
   );

@@ -9,14 +9,12 @@ import {LIGHT_ACT1, ShadowOf} from '../components/Shadows';
 import {AttentionField, GroundRing, IntentWedge, Matte, SoundArcs} from '../components/Signals';
 import {ConditionReadout, Label, Tag} from '../components/Type';
 import {S} from '../score';
-import {BRANCH_CAM, Caption, PROTAGONIST_X, SceneProps, WorldLayer, heartAt, useTimes} from './common';
+import {BRANCH_CAM, PROTAGONIST_X, SceneProps, WorldLayer, heartAt, useTimes} from './common';
 import {OTHER_START, principalsS03} from './Act1Open';
 import {wt2} from './Act2';
 import {Instruments, MotorPanel, ReactionGap, cyclistX, wt3} from './Act3Shared';
 
 const LANE = WORLD.lane.main;
-/** Act III: the lower bar holds the instruments, so captions sit just above it. */
-const LIFT = 128;
 const PS = laneScale(LANE);
 const OS = laneScale(OTHER_START.lane);
 
@@ -80,8 +78,6 @@ export const S16Rewind: React.FC<SceneProps> = ({T0}) => {
       <Matte />
       <Instruments T={T} t={t} cond={0} opacity={p(t, 5.0, 5.8)} readoutAt={99} railDraw={p(t, 5.2, 6.8, LINEAR)} />
       <Label text="III · The ladder" t={t - 0.4} x={W / 2} y={69} size={26} out={p(t, 4, 4.8)} color={C.MIST} weight={500} />
-      <Caption text="Back to the start. This time, from the inside." t={t} a={0.6} b={4.6} lift={LIFT} />
-      <Caption text="The heartbeat becomes a meter: five conditions of arousal." t={t} a={4.8} b={6.95} lift={LIFT} />
     </AbsoluteFill>
   );
 };
@@ -126,10 +122,6 @@ export const S17White: React.FC<SceneProps> = ({T0}) => {
       <Tag text="It was there the whole time." t={t - 7.6} x={W / 2} y={232} color={C.BONE} size={36} out={p(t, 10.8, 11.6)} />
       <Tag text="Outside attention, so outside awareness." t={t - 8.4} x={W / 2} y={286} size={28} out={p(t, 10.8, 11.6)} />
       <ReactionGap t={t} stim={13.6} react={15.0} label="Slower to react" x={660} y={240} scale={260} out={p(t, 19.6, 20.4)} />
-      <Caption text="Condition White: relaxed, unaware, attention somewhere else." t={t} a={0.8} b={6.2} lift={LIFT} />
-      <Caption text="Here is what you missed the first time." t={t} a={6.6} b={11.6} lift={LIFT} />
-      <Caption text="When something happens, it takes longer to notice and to react." t={t} a={12.2} b={17.2} lift={LIFT} />
-      <Caption text="The problem isn't fear. It's attention." t={t} a={17.6} b={21.6} lift={LIFT} />
     </AbsoluteFill>
   );
 };
@@ -189,9 +181,6 @@ export const S18Yellow: React.FC<SceneProps> = ({T0}) => {
       <Tag text="Appropriate for everyday activity" t={t - 6.2} x={W / 2} y={286} size={28} out={p(t, 9.4, 10)} />
       <Label text="Calm, but ready" t={t - 10.2} x={W / 2} y={250} size={76} out={p(t, 13.2, 14)} />
       <ReactionGap t={t} stim={14.4} react={14.85} label="Ready" x={660} y={240} scale={260} out={p(t, 19.4, 20.2)} />
-      <Caption text="Condition Yellow: relaxed alert. Head up, phone away." t={t} a={0.8} b={5.2} lift={LIFT} />
-      <Caption text="Nothing is wrong. You simply notice what's around you." t={t} a={5.6} b={9.8} lift={LIFT} />
-      <Caption text="When something happens, you see it sooner and respond sooner." t={t} a={14.2} b={20.4} lift={LIFT} />
     </AbsoluteFill>
   );
 };
@@ -234,9 +223,6 @@ export const S19Orange: React.FC<SceneProps> = ({T0}) => {
       <Tag text="Adrenaline rises" t={t - 11.4} x={W / 2} y={232} color={C.BONE} size={34} out={p(t, 22, 22.8)} />
       <Tag text="Fine motor skills may begin to decline" t={t - 16.2} x={W / 2} y={286} size={28} out={p(t, 22, 22.8)} />
       <MotorPanel t={t - 15.4} tremor={0.22} opacity={p(t, 15, 15.8) * (1 - p(t, 22.2, 22.9))} seed={3} />
-      <Caption text="Condition Orange begins when a specific possible threat appears." t={t} a={0.8} b={6.2} lift={LIFT} />
-      <Caption text="Attention narrows onto it. Everything else becomes less important." t={t} a={6.6} b={11.6} lift={LIFT} />
-      <Caption text="The heart speeds up, and precise tasks start to get harder." t={t} a={12} b={22.6} lift={LIFT} />
     </AbsoluteFill>
   );
 };

@@ -290,7 +290,7 @@ The film's emotional "home" is **Condition Yellow**: calm, but ready. It is the 
 
 - **Voice:** calm, mid-low register, unhurried (about 130 wpm), neutral accent. No trailer voice. The narrator is an observer, not an instructor.
 - **Density:** about 560 words over 6:36, roughly 45% of runtime. Narration drops out for key demonstrations: the freeze hold, the rewind, the Red tunnel, the onset of Black.
-- **In the current build,** narration concepts are rendered as restrained captions in the lower matte bar, and just above it in Act III, where the bar holds the instruments. Replace them with VO plus optional subtitles when a VO recording exists (see §13.9).
+- **The final VO script** lives in `explainer/src/narration.ts`: 66 timed lines, 549 words, about 229 s of speech. It drives the optional burned-in captions (`showCaptions`) and is exported by `npm run vo` to `docs/explainer/vo/`: an ElevenLabs script in 28 paste-ready blocks with placement times, a one-line-per-cue version, a cue sheet, and an `.srt`. Where the storyboard's narration concepts (§3) differ from it, the VO script wins.
 
 ---
 
@@ -835,7 +835,7 @@ explainer/
 
 **Still to do:**
 1. Replace the synthetic bed with designed stems (plaza ambience, the piano "ready" motif, the reversed swell for the rewind, the S04 tape-stop) in `public/audio/`, one `<Audio>` per act, with `volume={(f) => ...}` automation keyed to `levelAt`.
-2. Record VO, retime `SCENES` to it, and move `Caption` behind a `showCaptions` prop (default on for accessibility).
+2. **VO:** the script is final and timed (`src/narration.ts` → `npm run vo` → `docs/explainer/vo/`). Render the picture with `--props='{"showCaptions":false,"grain":false}'` for a VO master, then lay the ElevenLabs clips at their cue times (import the `.srt` as markers).
 
 ### 13.10 Programmatic vs. authored
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {createContext, useContext} from 'react';
 import {AbsoluteFill, useCurrentFrame} from 'remotion';
 import {H, W, conditionColor} from '../theme';
 import {FPS} from '../timeline';
@@ -39,9 +39,18 @@ export const heartAt = (T: number, extra?: {size?: number; glow?: number}) => ({
   glow: extra?.glow,
 });
 
-/** Caption line in the lower matte bar (narration rendered as restrained text). */
+/** Render options passed as input props (see Root.tsx / Film.tsx). */
+export type FilmOptions = {showCaptions: boolean; grain: boolean; soundtrack: boolean};
+export const DEFAULT_OPTIONS: FilmOptions = {showCaptions: true, grain: true, soundtrack: true};
+export const OptionsContext = createContext<FilmOptions>(DEFAULT_OPTIONS);
+
+/**
+ * Caption line in the lower matte bar (narration rendered as restrained text).
+ * The same cues drive the VO script and the .srt (see scripts/export-vo.ts).
+ */
 export const Caption: React.FC<{text: string; t: number; a: number; b: number; lift?: number}> = ({text, t, a, b, lift = 0}) => {
-  if (t < a || t > b) return null;
+  const {showCaptions} = useContext(OptionsContext);
+  if (!showCaptions || t < a || t > b) return null;
   const o = Math.min(1, (t - a) / 0.5, (b - t) / 0.5);
   return (
     <div style={{position: 'absolute', left: '50%', bottom: 69 + lift, transform: 'translate(-50%, 50%)', fontFamily: 'inherit', color: '#E9E4D8', opacity: o, fontSize: lift ? 32 : 34, whiteSpace: 'nowrap', letterSpacing: '0.01em', textShadow: lift ? '0 2px 14px rgba(0,0,0,0.9), 0 0 4px rgba(0,0,0,0.8)' : undefined}}>

@@ -1,0 +1,88 @@
+# CALM, BUT READY: VO script for ElevenLabs (66 lines, 549 words, ~229 s of speech in a 6:36.0 film)
+# Paste ONLY the text under each ### header (headers are not narration). One generation per block (28 blocks).
+# Place each generated clip so it starts at the "place at" time. Break tags work with Multilingual v2 / Turbo / Flash;
+# on v3, replace them with a short pause or generate lines separately (elevenlabs-lines.txt).
+
+### B01 · S02 An Ordinary Day · place at 0:13.0 · lines N01
+Most days are ordinary.
+
+### B02 · S02 An Ordinary Day · place at 0:19.5 · lines N02
+Nothing happens. Nothing needs to.
+
+### B03 · S03 Something Doesn't Fit · place at 0:30.5 · lines N03
+Then, sometimes, something doesn't fit.
+
+### B04 · S03 Something Doesn't Fit · place at 0:37.5 · lines N04
+When a threat appears, a person has to respond.
+
+### B05 · S04 One Moment, Five Paths · place at 0:45.2 · lines N05, N06
+Time stops. One moment, one threat. <break time="0.7s" /> Broadly, there are five ways a response can go.
+
+### B06 · S05 Fight · place at 0:57.0 · lines N07
+Fight: move toward the threat and confront it. It can work, when trained and appropriate.
+
+### B07 · S06 Flight · place at 1:07.0 · lines N08
+Flight: move away and increase the distance, when escape is possible.
+
+### B08 · S07 Freeze · place at 1:17.8 · lines N09, N10, N11
+Freeze: the body stops, while the world keeps moving. <break time="0.9s" /> Sometimes stillness hides you, or buys time. <break time="0.9s" /> Held too long, the opening closes. It can follow sensory overload.
+
+### B09 · S08 Submit · place at 1:33.0 · lines N12
+Submit: lower, yield, hand control to the threat.
+
+### B10 · S09 Posture · place at 1:43.0 · lines N13
+Posture: look bigger, sound firm, show resistance.
+
+### B11 · S09 Posture · place at 1:49.0 · lines N14
+In people and animals alike, it can stop violence before it starts.
+
+### B12 · S10 Perceived Strength · place at 1:55.8 · lines N15, N16, N17, N18
+The appearance of strength is as important, in many cases, as strength itself. <break time="0.3s" /> A threat reacts to what it perceives. <break time="0.3s" /> Animals do it too. <break time="0.6s" /> Signals like this are how we read each other.
+
+### B13 · S11 The Flock · place at 2:12.6 · lines N19, N20, N21
+One metaphor describes people by how they relate to violence. <break time="1.4s" /> Sheep: ordinary people who live peacefully and avoid violence. <break time="1.3s" /> Many are uncomfortable even thinking about it, and that's normal.
+
+### B14 · S12 The Wolf · place at 2:29.0 · lines N22, N23
+Wolves: people who use violence against others. <break time="2.9s" /> For gain, for power, or out of cruelty. Criminals, terrorists, predators.
+
+### B15 · S13 The Sheepdog · place at 2:42.8 · lines N24, N25, N26
+Someone on the bench stands up. Nothing about them looks different. <break time="0.6s" /> Sheepdogs: protectors, willing to confront violence to defend others. <break time="1.4s" /> Soldiers, police officers, and others willing to step in.
+
+### B16 · S14 Same Capability, Different Intent · place at 2:58.8 · lines N27, N28, N29
+Wolf and sheepdog can both use force. <break time="1.7s" /> What differs is intent: one preys, the other protects. <break time="1.4s" /> And control: the sheepdog is expected to use force responsibly.
+
+### B17 · S15 Prepared, Not Aggressive · place at 3:15.8 · lines N30, N31, N32, N33
+Most days, the sheepdog's life looks like everyone else's. <break time="0.6s" /> The difference is readiness, not aggression. <break time="2.1s" /> It's a metaphor, not a scientific classification of people. <break time="0.4s" /> Calm, but ready is a state, and states change.
+
+### B18 · S16 Back to the Start · place at 3:33.2 · lines N34
+Back to the start. Now, from the inside.
+
+### B19 · S17 Condition White · place at 3:38.0 · lines N35, N36, N37, N38
+Condition White: relaxed, unaware, attention somewhere else. <break time="2.7s" /> Here is what you missed the first time. <break time="2.3s" /> When something happens, it takes longer to notice and to react. <break time="0.8s" /> The problem isn't fear. It's attention.
+
+### B20 · S18 Condition Yellow · place at 3:59.8 · lines N39, N40, N41, N42
+Condition Yellow: relaxed alert. Head up, phone away. <break time="1.5s" /> Nothing is wrong. You simply notice what's around you. <break time="0.8s" /> Calm, but ready. <break time="2.8s" /> When something happens, you see it sooner and respond sooner.
+
+### B21 · S19 Condition Orange · place at 4:20.8 · lines N43, N44, N45, N46
+Condition Orange begins when a specific possible threat appears. <break time="2.1s" /> Attention narrows onto it. Everything else becomes less important. <break time="1.6s" /> Adrenaline rises. The heart speeds up. <break time="2.7s" /> And precise tasks start to get harder.
+
+### B22 · S20 Condition Red · place at 4:43.6 · lines N47, N48, N49, N50, N51
+Condition Red: the threat is immediate. The action phase. <break time="1.3s" /> Big movements stay strong. Precise ones fall apart. <break time="1.7s" /> Complex thinking can decline too. <break time="2.7s" /> Someone shouts, “This way!” The voice, and the exit, may never register. <break time="1.0s" /> Options narrow to fight or flight. Effects vary from person to person.
+
+### B23 · S21 Condition Black · place at 5:10.6 · lines N52, N53, N54, N55, N56
+Condition Black: the system overloads. <break time="2.5s" /> Signals overlap. Nothing forms a clear picture. <break time="0.9s" /> Action becomes erratic, or stops altogether. <break time="1.9s" /> Freeze: the same response from the start. <break time="1.9s" /> Extreme arousal doesn't make you more ready. It can take decisions away.
+
+### B24 · S22 What Arousal Does · place at 5:36.0 · lines N57
+Arousal shapes what you notice, what your body can do, and how you decide.
+
+### B25 · S22 What Arousal Does · place at 5:45.8 · lines N58
+These ranges are approximate, and they differ from person to person.
+
+### B26 · S23 The Chain · place at 5:52.8 · lines N59, N60, N61, N62
+Put it together: threat, awareness, arousal, condition, response, decision. <break time="2.3s" /> Notice late, and there's less time to respond, and fewer options. <break time="2.0s" /> Notice early, and there's time: time to stay in control, and to choose. <break time="2.0s" /> Preparedness is not aggression. It keeps the decision in your hands.
+
+### B27 · S24 Calm, But Ready · place at 6:21.0 · lines N63, N64, N65
+Recognize early. <break time="2.0s" /> Know your options. <break time="1.6s" /> Keep control.
+
+### B28 · S24 Calm, But Ready · place at 6:31.4 · lines N66
+Calm, but ready.

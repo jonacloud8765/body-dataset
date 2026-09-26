@@ -10,7 +10,7 @@ import {AttentionField, IntentWedge, Matte, PulseLine} from '../components/Signa
 import {ResponseCompass} from '../components/Compass';
 import {Label, Tag} from '../components/Type';
 import {beatsAt, pulseAt} from '../score';
-import {Caption, SceneProps, WorldLayer, heartAt, useTimes} from './common';
+import {SceneProps, WorldLayer, heartAt, useTimes} from './common';
 
 const NODES = ['Threat', 'Awareness', 'Arousal', 'Condition', 'Response', 'Decision'] as const;
 const NX = (i: number) => 260 + i * 280;
@@ -103,10 +103,6 @@ export const S23Chain: React.FC<SceneProps> = ({T0}) => {
       <Tag text="Time to stay in control, and to choose." t={t - 17.4} x={W / 2} y={272} size={30} out={p(t, 20, 20.6)} />
       <Label text="Preparedness is not aggression" t={t - 20.8} x={W / 2} y={230} size={60} out={out} />
       <Tag text="It keeps the decision in your hands." t={t - 22.2} x={W / 2} y={300} size={32} color={C.BONE} out={out} />
-      <Caption text="Put it together: threat, awareness, arousal, condition, response, decision." t={t} a={0.8} b={6.4} />
-      <Caption text="Notice late, and there is less time to respond, and fewer options." t={t} a={6.8} b={13} />
-      <Caption text="Notice early, and there is time: time to stay in control, and to choose." t={t} a={13.4} b={20.4} />
-      <Caption text="The goal isn't constant aggression. It's controlled preparedness." t={t} a={20.8} b={27.6} />
     </AbsoluteFill>
   );
 };

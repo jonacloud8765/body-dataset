@@ -10,7 +10,7 @@ import {DistanceLine, GroundRing, IntentWedge, Matte, PulseLine} from '../compon
 import {ResponseCompass} from '../components/Compass';
 import {Label, Slate} from '../components/Type';
 import {beatsAt} from '../score';
-import {BRANCH_CAM, Caption, OTHER_X, PROTAGONIST_X, SceneProps, WorldLayer, heartAt, useTimes} from './common';
+import {BRANCH_CAM, OTHER_X, PROTAGONIST_X, SceneProps, WorldLayer, heartAt, useTimes} from './common';
 
 const LANE = WORLD.lane.main;
 const PS = laneScale(LANE);
@@ -86,8 +86,6 @@ export const S02OrdinaryDay: React.FC<SceneProps> = ({T0}) => {
       </WorldLayer>
       <Matte />
       <Slate text="I · THE MOMENT" t={t - 0.4} out={p(t, 4, 5)} />
-      <Caption text="Most days are ordinary." t={t} a={1} b={6.5} />
-      <Caption text="Nothing happens. Nothing needs to." t={t} a={7.5} b={14.5} />
     </AbsoluteFill>
   );
 };
@@ -128,8 +126,6 @@ export const S03Shift: React.FC<SceneProps> = ({T0}) => {
         <Figure x={PROTAGONIST_X} y={LANE} pose={st.protPose} scale={PS} heart={heart} />
       </WorldLayer>
       <Matte />
-      <Caption text="Then, sometimes, something doesn't fit." t={t} a={2.5} b={8.5} />
-      <Caption text="When a threat appears, a person has to respond." t={t} a={9.5} b={15.6} />
     </AbsoluteFill>
   );
 };
@@ -168,8 +164,6 @@ export const S04Branch: React.FC<SceneProps> = ({T0}) => {
         <ResponseCompass x={cx} y={cy} draw={draws} lit={{fight: litAll, flight: litAll, freeze: litAll, posture: litAll, submit: litAll}} rx={250} ry={150} />
       </WorldLayer>
       <Matte />
-      <Caption text="Time stops. One moment, one threat." t={t} a={1.2} b={4} />
-      <Caption text="Broadly, there are five ways a response can go." t={t} a={4.4} b={11.6} />
     </AbsoluteFill>
   );
 };

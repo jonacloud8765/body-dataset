@@ -10,12 +10,10 @@ import {AttentionField, IntentWedge, Matte, SoundArcs, Tunnel} from '../componen
 import {ResponseCompass} from '../components/Compass';
 import {ConditionReadout, Label, Tag} from '../components/Type';
 import {S} from '../score';
-import {Caption, OTHER_X, PROTAGONIST_X, SceneProps, WorldLayer, heartAt, useTimes} from './common';
+import {OTHER_X, PROTAGONIST_X, SceneProps, WorldLayer, heartAt, useTimes} from './common';
 import {Instruments, MotorPanel, wt3} from './Act3Shared';
 
 const LANE = WORLD.lane.main;
-/** Act III: the lower bar holds the instruments, so captions sit just above it. */
-const LIFT = 196;
 const PS = laneScale(LANE);
 const noCyclist = [50];
 const RED_STOP_X = 470;
@@ -83,11 +81,6 @@ export const S20Red: React.FC<SceneProps> = ({T0}) => {
       <Tag text="Tunnel vision may occur" t={t - 16.4} x={W / 2} y={250} color={C.BONE} size={34} out={p(t, 20.8, 21.4)} />
       <Tag text="Auditory exclusion may occur" t={t - 17.4} x={W / 2} y={302} size={28} out={p(t, 20.8, 21.4)} />
       <Tag text="Fight or flight" t={t - 22.4} x={W / 2} y={250} color={C.BONE} size={34} out={p(t, 26.2, 26.9)} />
-      <Caption text="Condition Red: the threat is immediate. This is the action phase." t={t} a={0.6} b={5.2} lift={LIFT} />
-      <Caption text="Big movements stay strong. Precise ones fall apart." t={t} a={5.6} b={10.2} lift={LIFT} />
-      <Caption text="Complex thinking can decline too." t={t} a={10.6} b={14.8} lift={LIFT} />
-      <Caption text="Someone shouts “This way!” The voice, and the exit, may never register." t={t} a={15.4} b={21} lift={LIFT} />
-      <Caption text="Options narrow toward fight or flight. Effects differ from person to person." t={t} a={21.4} b={26.8} lift={LIFT} />
     </AbsoluteFill>
   );
 };
@@ -147,11 +140,6 @@ export const S21Black: React.FC<SceneProps> = ({T0}) => {
       <Label text="Freeze" t={t - 13.4} x={W / 2} y={250} behavior="freeze" size={72} out={p(t, 17, 17.6)} />
       <Label text="More arousal is not more readiness" t={t - 18} x={W / 2} y={250} size={50} out={p(t, 24, 24.8)} />
       <Tag text="Higher risk of catastrophic mistakes" t={t - 19.2} x={W / 2} y={318} size={28} out={p(t, 24, 24.8)} />
-      <Caption text="Condition Black: the system overloads." t={t} a={0.6} b={4.8} lift={LIFT} />
-      <Caption text="Signals overlap. Nothing resolves into a clear picture." t={t} a={5.2} b={8.6} lift={LIFT} />
-      <Caption text="Action becomes erratic, or stops altogether." t={t} a={9} b={13} lift={LIFT} />
-      <Caption text="Freeze: the same response we saw at the start. The world keeps moving." t={t} a={13.4} b={17.8} lift={LIFT} />
-      <Caption text="Extreme arousal doesn't make you more ready. It can take decisions away." t={t} a={18.2} b={24.6} lift={LIFT} />
     </AbsoluteFill>
   );
 };

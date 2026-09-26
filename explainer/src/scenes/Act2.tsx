@@ -9,7 +9,7 @@ import {Animal, LIGHT_ACT2, ShadowLight, ShadowOf} from '../components/Shadows';
 import {GroundRing, IntentWedge, Matte} from '../components/Signals';
 import {Label, Tag} from '../components/Type';
 import {S} from '../score';
-import {Caption, PROTAGONIST_X, SceneProps, WorldLayer, heartAt, useTimes} from './common';
+import {PROTAGONIST_X, SceneProps, WorldLayer, heartAt, useTimes} from './common';
 import {FREEZE_T} from './Act1Responses';
 
 const LANE = WORLD.lane.main;
@@ -66,9 +66,6 @@ export const S11Flock: React.FC<SceneProps> = ({T0}) => {
       <Label text="Sheep" t={t - 6.4} x={W / 2} y={232} out={p(t, 14.8, 15.6)} />
       <Tag text="Ordinary, peaceful people" t={t - 7.1} x={W / 2} y={312} color={C.BONE} size={32} out={p(t, 14.8, 15.6)} />
       <Tag text="Law-abiding · cooperative · the majority" t={t - 8.0} x={W / 2} y={358} size={26} out={p(t, 14.8, 15.6)} />
-      <Caption text="One metaphor describes people by how they relate to violence." t={t} a={0.6} b={5.8} />
-      <Caption text="Sheep: ordinary people who live peacefully and avoid violence." t={t} a={6.2} b={11} />
-      <Caption text="Many are uncomfortable even thinking about it. That is normal, not weakness." t={t} a={11.2} b={15.8} />
     </AbsoluteFill>
   );
 };
@@ -116,8 +113,6 @@ export const S12Wolf: React.FC<SceneProps> = ({T0}) => {
       <Label text="Wolf" t={t - 4.4} x={W / 2} y={232} out={p(t, 13, 13.8)} />
       <Tag text="Preys on others" t={t - 5.1} x={W / 2} y={312} color={C.BONE} size={32} out={p(t, 13, 13.8)} />
       <Tag text="Predatory · exploitative · seeks dominance" t={t - 6.0} x={W / 2} y={358} size={26} out={p(t, 13, 13.8)} />
-      <Caption text="Wolves: people who use violence against others." t={t} a={1.0} b={6.6} />
-      <Caption text="For gain, for power, or out of cruelty. Criminals, terrorists, predators." t={t} a={6.8} b={13.6} />
     </AbsoluteFill>
   );
 };
@@ -172,9 +167,6 @@ export const S13Sheepdog: React.FC<SceneProps> = ({T0}) => {
       <Label text="Sheepdog" t={t - 6.2} x={W / 2} y={232} out={p(t, 15, 15.8)} />
       <Tag text="Protects others" t={t - 6.9} x={W / 2} y={312} color={C.BONE} size={32} out={p(t, 15, 15.8)} />
       <Tag text="Capable of confronting violence · under control" t={t - 7.8} x={W / 2} y={358} size={26} out={p(t, 15, 15.8)} />
-      <Caption text="Someone on the bench stands up. Nothing about them looks different." t={t} a={0.8} b={5.6} />
-      <Caption text="Sheepdogs: protectors, willing to confront violence to defend others." t={t} a={6.0} b={11} />
-      <Caption text="Soldiers, police officers, and others who step in when it matters." t={t} a={11.2} b={15.8} />
     </AbsoluteFill>
   );
 };
@@ -218,9 +210,6 @@ export const S14CapabilityIntent: React.FC<SceneProps> = ({T0}) => {
       <Matte />
       <Label text="Same capability" t={t - 2.0} x={W / 2} y={200} size={64} out={out} />
       <Label text="Different intent" t={t - 6.4} x={W / 2} y={282} size={64} out={out} color={C.BONE} />
-      <Caption text="In the metaphor, wolf and sheepdog can both use force." t={t} a={0.8} b={5.2} />
-      <Caption text="The difference is direction: one turns toward the flock, the other stands between it and harm." t={t} a={5.4} b={10.4} />
-      <Caption text="And control: the sheepdog is expected to use force responsibly." t={t} a={10.6} b={16.6} />
     </AbsoluteFill>
   );
 };
@@ -241,9 +230,6 @@ export const S15Prepared: React.FC<SceneProps> = ({T0}) => {
       <Tag text="Lives in peace. Ready to protect." t={t - 2.4} x={W / 2} y={312} color={C.BONE} size={32} out={p(t, 8.4, 9.2)} />
       <Tag text="A metaphor: a way to think about roles and intent." t={t - 10.4} x={W / 2} y={232} color={C.BONE} size={36} />
       <Tag text="Not a scientific classification of people." t={t - 11.2} x={W / 2} y={284} size={30} />
-      <Caption text="Most of the time, the sheepdog's life looks like everyone else's: peaceful and ordinary." t={t} a={0.8} b={5.2} />
-      <Caption text="The difference is readiness, not aggression." t={t} a={5.4} b={9.4} />
-      <Caption text="Calm, but ready isn't a role. It's a state, and states change." t={t} a={11.8} b={14.9} />
     </AbsoluteFill>
   );
 };
