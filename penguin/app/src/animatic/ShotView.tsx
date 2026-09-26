@@ -4,7 +4,6 @@ import {FONT_DISPLAY, FONT_MONO} from '../fonts';
 import {CREATOR_GOLD, INK, LINE_2, PAPER, WASH_ICE} from '../theme/palette';
 import {beatsAt, FPS, GRID, HEIGHT, posToSeconds, WIDTH} from '../timing/song';
 import type {Shot} from '../timing/timeline';
-import {beakOpen} from '../timing/vocal';
 import {mix, mixSky, SKY, type Sky} from './color';
 import {BigEye, Colony, Crew, Feet, GiantPrint, Mountain, Penguin, type EyeState} from './figures';
 import type {CamKey, El, Move, PenguinKey, SkySpec, Spec, When} from './types';
@@ -164,8 +163,8 @@ const renderEl = (el: El, i: number, c: Ctx): React.ReactNode => {
     case 'penguin': {
       const st = penguinState(el.keys, f, res);
       const step = stepFor(el.walk, t);
-      const sing = el.sing ?? c.shot.sing;
-      const beak = sing ? beakOpen(c.global) : 0;
+      // No lip sync (director's call): the beak stays closed while he sings.
+      const beak = 0;
       return (
         <g key={i} transform={`translate(${st.x},${st.y})${el.counterRoll ? ` rotate(${-c.roll})` : ''}`}>
           <Penguin h={st.h} view={st.view} facing={st.facing} pose={el.walk || st.pose !== 'walk' ? st.pose : 'stand'} step={step} beak={beak} headTurn={st.headTurn} t={t} />

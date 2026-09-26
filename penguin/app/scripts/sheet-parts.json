@@ -1,0 +1,16 @@
+{
+  "_doc": "Where each drawing sits on the model sheet (penguin/source/him-model-sheet.jpg, 1366x768 px). box = [x0, y0, x1, y1]. anchor = the part's origin: feet baseline center for bodies, the neck base for heads. keep (optional) = polygon that isolates the figure from nearby marks. Used by trace-sheet.py.",
+  "parts": {
+    "body.front":   {"box": [34, 155, 184, 545], "anchor": "feet"},
+    "body.34":      {"box": [186, 157, 326, 546], "anchor": "feet"},
+    "head.frown":     {"box": [356, 119, 490, 268], "anchor": "bottom"},
+    "head.sideeye":   {"box": [495, 118, 621, 270], "anchor": "bottom"},
+    "head.smirk":     {"box": [628, 112, 754, 269], "anchor": "bottom"},
+    "head.annoyed":   {"box": [767, 132, 880, 270], "anchor": "bottom"},
+    "head.profile":   {"box": [899, 130, 1019, 273], "anchor": "bottom"},
+    "head.laugh":     {"box": [359, 292, 487, 446], "anchor": "bottom"},
+    "head.sad":       {"box": [496, 302, 617, 444], "anchor": "bottom"},
+    "head.surprised": {"box": [619, 292, 747, 445], "anchor": "bottom"},
+    "head.angry":     {"box": [762, 292, 882, 447], "anchor": "bottom"}
+  }
+}

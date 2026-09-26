@@ -3,3 +3,5 @@ out/
 .remotion/
 # the song is copied here locally by `npm run audio` and never committed (the repo is public)
 public/audio/
+# traced from the model sheet by scripts/trace-sheet.py; original artwork, never committed
+public/art/
