@@ -1,0 +1,5 @@
+node_modules/
+out/
+.remotion/
+# the song is copied here locally by `npm run audio` and never committed (the repo is public)
+public/audio/

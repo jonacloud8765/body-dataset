@@ -25,7 +25,7 @@
 | **S17** | He sings | 0:38.23 | 1.82 s | 16.4 | Chorus 1 | I'm the penguin / I know where I'm going… | CINEMA | 4 | MCU three-quarter front, low angle · Locked; very slight rise |
 | **S18** | The orbit | 0:40.04 | 1.82 s | 17.3 | Chorus 1 | …I know where I'm going | CINEMA | 4 | MS, orbiting from three-quarter front to three-quarter back · Orbit 120° over 3 beats, easing into a locked composition |
 | **S19** | Heading for the mountain | 0:41.86 | 1.82 s | 18.2 | Chorus 1 | Heading for the mountain… | CINEMA | 4 | MWS side · Tracks right with him; strong parallax |
-| **S20** | Profile match | 0:43.68 | 1.21 s | 19.1 | Chorus 1 | …Heading for the mountain / I'm meeting the creator, yeah… | CINEMA | 4 | CU profile, then WS of the mountain at the same screen position and size · Locked |
+| **S20** | Profile match | 0:43.68 | 1.21 s | 19.1 | Chorus 1 | …Heading for the mountain / I'm meeting the creator, yeah… | CINEMA | 4 | CU profile, then WS of the mountain mirrored into the same screen space (beak to beak) · Locked |
 | **S21** | The promise | 0:44.89 | 3.33 s | 19.3 | Chorus 1 | …I'm meeting the creator, yeah | CINEMA | 4 | WS, the mountain at 10% of frame height · Slow push-in |
 | **S22** | The clipboard | 0:48.22 | 4.84 s | 20.4.5 | Chorus 1 | We're making a documentary / Can we interrupt your journey | DOC | 4 | Standing-height MS looking down at him; the director's mittens and clipboard in the foreground · Handheld; late pan right at the end |
 | **S23** | Walks on | 0:53.06 | 1.51 s | 22.4.5 | Chorus 1 | I'm the penguin | CINEMA | 4 | WS three-quarter front, the crew behind him · Slow track back ahead of him |
@@ -45,7 +45,7 @@
 | **S37** | Dawn | 1:26.67 | 1.82 s | 36.4 | Chorus 2 | I'm the penguin / I know where I'm going… | CINEMA | 4 | MCU three-quarter, low angle (same as S17) · Locked, slight rise |
 | **S38** | The orbit, again | 1:28.48 | 1.82 s | 37.3 | Chorus 2 | …I know where I'm going | CINEMA | 4 | MS orbiting · Orbit 120° |
 | **S39** | Refrain R6 · the foot of the mountain | 1:30.30 | 1.82 s | 38.2 | Chorus 2 | Heading for the mountain… | CINEMA | 4 | EWS Refrain; the mountain exceeds the frame · Locked |
-| **S40** | Profile match, again | 1:32.12 | 1.21 s | 39.1 | Chorus 2 | …Heading for the mountain / I'm meeting the creator, yeah… | CINEMA | 4 | CU profile, match cut to the summit's profile · Locked |
+| **S40** | Profile match, again | 1:32.12 | 1.21 s | 39.1 | Chorus 2 | …Heading for the mountain / I'm meeting the creator, yeah… | CINEMA | 4 | CU profile, mirror match cut to the summit's profile · Locked |
 | **S41** | The breath | 1:33.33 | 3.33 s | 39.3 | Chorus 2 | …I'm meeting the creator, yeah | CINEMA | 4 | MS three-quarter, the face rising behind him · Locked |
 | **S42** | Please? | 1:36.66 | 4.84 s | 40.4.5 | Chorus 2 | We're making a documentary / Can we interrupt your journey | DOC | 4 | Standing-height MS, handheld · Handheld, heavy; follow-pan right on 42.3 |
 | **S43** | The first rock | 1:41.50 | 1.51 s | 42.4.5 | Chorus 2 | I'm the penguin | CINEMA | 4 | MCU side, the rock filling frame right · Locked |
@@ -455,10 +455,10 @@ Every shot, with every field. Times are song time. *Beats* are events inside the
 
 - **Sung:** “…Heading for the mountain” / “I'm meeting the creator, yeah…”
 - **Music:** Full chorus; kick strong on the odd bar
-- **Visual:** Close-up of his head in profile against the sky. It dissolves into the mountain on the horizon, and the two outlines line up: crown and summit dome, beak and summit spur.
+- **Visual:** Close-up of his head in profile against the sky, beak pointing right. It dissolves into the mountain on the horizon, which fills the same part of the frame as his mirror image: the summit dome where his crown was, the spur pointing back at his beak. For a moment the two profiles face each other beak to beak.
 - **Character:** Sings, then holds still for the dissolve
 - **Head · lip sync:** profile · sings
-- **Framing:** CU profile, then WS of the mountain at the same screen position and size
+- **Framing:** CU profile, then WS of the mountain mirrored into the same screen space (beak to beak)
 - **Camera:** Locked
 - **Environment:** Sky, then the mountain
 - **Lighting:** Sun
@@ -851,10 +851,10 @@ Every shot, with every field. Times are song time. *Beats* are events inside the
 
 - **Sung:** “…Heading for the mountain” / “I'm meeting the creator, yeah…”
 - **Music:** Full chorus
-- **Visual:** Callback to S20: his head in profile, and this time a straight match cut to the mountain's summit in profile, filling the frame at the same size. The shapes are unmistakably alike.
+- **Visual:** Callback to S20: his head in profile, and this time a straight match cut to the mountain's summit in profile, filling the frame at the same size and facing him, spur to beak. The shapes are unmistakably alike.
 - **Character:** Sings, then holds
 - **Head · lip sync:** profile · sings
-- **Framing:** CU profile, match cut to the summit's profile
+- **Framing:** CU profile, mirror match cut to the summit's profile
 - **Camera:** Locked
 - **Environment:** The summit
 - **Lighting:** Dawn

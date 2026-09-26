@@ -1,0 +1,27 @@
+{
+  "name": "the-penguin",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Remotion build of the music video for \"I'm the Penguin\"",
+  "scripts": {
+    "audio": "node scripts/prepare-audio.mjs",
+    "studio": "npm run audio && remotion studio src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "still": "remotion still src/index.ts",
+    "animatic": "npm run audio && node scripts/render.mjs Animatic out/animatic-540p.mp4 --scale=0.5 --crf=26",
+    "animatic:stills": "npm run audio && node scripts/cut-stills.mjs",
+    "verify": "python3 scripts/verify-render.py"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.529",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "remotion": "4.0.529"
+  },
+  "devDependencies": {
+    "@remotion/bundler": "4.0.529",
+    "@remotion/renderer": "4.0.529",
+    "@types/react": "19.1.8",
+    "typescript": "5.8.3"
+  }
+}

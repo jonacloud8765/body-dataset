@@ -334,7 +334,7 @@ The creator is HIM's design scaled up to a mountain and weathered by ten thousan
 
 | Seed | Planted | Repeated | Paid off |
 |---|---|---|---|
-| **Silhouette.** Summit dome plus spur reads as a bowed penguin head | The map's mountain marker (S01) and the first speck on the horizon (S04, S06) | His profile dissolves into the mountain's (S20); a straight match cut, bigger (S40) | The sunrise draws the whole outline as one gold line (S49), one bar before he steps onto the beak |
+| **Silhouette.** Summit dome plus spur reads as a bowed penguin head | The map's mountain marker (S01) and the first speck on the horizon (S04, S06) | His profile dissolves into the mountain's, mirrored so the two meet beak to beak (S20); a straight match cut, bigger (S40) | The sunrise draws the whole outline as one gold line (S49), one bar before he steps onto the beak |
 | **Breath.** A summit plume, on a downbeat | The first plume, "I feel it" (S15) | Every clear wide shot (S21, S27) | The breath rolls down the slope and washes over him (S41) |
 | **Eyes.** Two dark caves sealed with ice | Visible as shadows under the summit (S21) | They catch the dusk for six frames (S27); dark and huge (S36); sealed walls of ice (S52–S53) | The seals crack (S54) and the eyes open on the top note (S55) |
 | **Crest.** Two snow cornices curling above the caves | Visible from S21 on | Rimmed gold at sunrise (S49) | They rise with the brow as the eyes open (S55) |
@@ -390,7 +390,7 @@ The shots are in §12. The **bold** beats are the ones the story cannot lose.
 
 **ACT II · THE JOURNEY**
 12. **He sings for the first time.** The sun breaks through (S17). The camera circles him until the mountain stands behind him (S18).
-13. Heading for the mountain at speed. His head in profile dissolves into the mountain's profile, and the shapes match (S19–S21).
+13. Heading for the mountain at speed. His head in profile dissolves into the mountain's, mirrored: the two profiles face each other beak to beak (S19–S21).
 14. **The documentary interrupts.** WE'RE MAKING A DOCUMENTARY. Flip: CAN WE INTERRUPT YOUR JOURNEY? He stares down the lens for exactly one beat, then walks around them (S22–S23).
 15. Joy: a belly flop, a toboggan run, airborne on the high "yeah" (S24–S26).
 16. **Dusk.** For six frames the mountain's two caves catch the last sun like eyes (S27).
@@ -810,7 +810,7 @@ Every cut has a reason. The default is a hard cut on a bar line. The transitions
 | **Letterbox slam** | Matte bars slide in from top and bottom in 4 frames; the UI blinks off | Entering his film | On a vocal pickup or downbeat | → S04, → S17, → S23, → S31, → S43 |
 | **Whip pan** | He turns (or drops); the camera whips the same way over 12 frames, and the cut hides in the motion blur | His decision | Lands on beat 1 | S10 → S11, S24 → S25 |
 | **Horizon hold** | The horizon line stays at the same height across the cut while the light changes | Time passing | On the lift | S15 → S16 |
-| **Profile match** | His head in profile dissolves (S20) or cuts (S40) into the mountain's outline | The key seed of the reveal | Centered on "I'm meet-" | S20, S40 |
+| **Profile match** | His head in profile dissolves (S20) or cuts (S40) into the mountain's outline, mirrored so the two face each other beak to beak (it foreshadows the greeting, S57) | The key seed of the reveal | Centered on "I'm meet-" | S20, S40 |
 | **Light burst** | The overcast wash wipes off right to left in 6 frames | The sun breaks through | On the chorus downbeat | S17, S37 |
 | **Time-lapse in the shot** | The light changes inside one locked shot | A day ends | Across the chorus tag | S27 |
 | **Glitch to storm** | The viewfinder glitch tears into white noise, which becomes the blizzard | He broke their camera | On the bar line | S30 → S31 |
@@ -855,7 +855,7 @@ Every cut has a reason. The default is a hard cut on a bar line. The transitions
 | **S17** | He sings | 0:38.23 | 1.82 s | 16.4 | Chorus 1 | I'm the penguin / I know where I'm going… | CINEMA | 4 | MCU three-quarter front, low angle · Locked; very slight rise |
 | **S18** | The orbit | 0:40.04 | 1.82 s | 17.3 | Chorus 1 | …I know where I'm going | CINEMA | 4 | MS, orbiting from three-quarter front to three-quarter back · Orbit 120° over 3 beats, easing into a locked composition |
 | **S19** | Heading for the mountain | 0:41.86 | 1.82 s | 18.2 | Chorus 1 | Heading for the mountain… | CINEMA | 4 | MWS side · Tracks right with him; strong parallax |
-| **S20** | Profile match | 0:43.68 | 1.21 s | 19.1 | Chorus 1 | …Heading for the mountain / I'm meeting the creator, yeah… | CINEMA | 4 | CU profile, then WS of the mountain at the same screen position and size · Locked |
+| **S20** | Profile match | 0:43.68 | 1.21 s | 19.1 | Chorus 1 | …Heading for the mountain / I'm meeting the creator, yeah… | CINEMA | 4 | CU profile, then WS of the mountain mirrored into the same screen space (beak to beak) · Locked |
 | **S21** | The promise | 0:44.89 | 3.33 s | 19.3 | Chorus 1 | …I'm meeting the creator, yeah | CINEMA | 4 | WS, the mountain at 10% of frame height · Slow push-in |
 | **S22** | The clipboard | 0:48.22 | 4.84 s | 20.4.5 | Chorus 1 | We're making a documentary / Can we interrupt your journey | DOC | 4 | Standing-height MS looking down at him; the director's mittens and clipboard in the foreground · Handheld; late pan right at the end |
 | **S23** | Walks on | 0:53.06 | 1.51 s | 22.4.5 | Chorus 1 | I'm the penguin | CINEMA | 4 | WS three-quarter front, the crew behind him · Slow track back ahead of him |
@@ -875,7 +875,7 @@ Every cut has a reason. The default is a hard cut on a bar line. The transitions
 | **S37** | Dawn | 1:26.67 | 1.82 s | 36.4 | Chorus 2 | I'm the penguin / I know where I'm going… | CINEMA | 4 | MCU three-quarter, low angle (same as S17) · Locked, slight rise |
 | **S38** | The orbit, again | 1:28.48 | 1.82 s | 37.3 | Chorus 2 | …I know where I'm going | CINEMA | 4 | MS orbiting · Orbit 120° |
 | **S39** | Refrain R6 · the foot of the mountain | 1:30.30 | 1.82 s | 38.2 | Chorus 2 | Heading for the mountain… | CINEMA | 4 | EWS Refrain; the mountain exceeds the frame · Locked |
-| **S40** | Profile match, again | 1:32.12 | 1.21 s | 39.1 | Chorus 2 | …Heading for the mountain / I'm meeting the creator, yeah… | CINEMA | 4 | CU profile, match cut to the summit's profile · Locked |
+| **S40** | Profile match, again | 1:32.12 | 1.21 s | 39.1 | Chorus 2 | …Heading for the mountain / I'm meeting the creator, yeah… | CINEMA | 4 | CU profile, mirror match cut to the summit's profile · Locked |
 | **S41** | The breath | 1:33.33 | 3.33 s | 39.3 | Chorus 2 | …I'm meeting the creator, yeah | CINEMA | 4 | MS three-quarter, the face rising behind him · Locked |
 | **S42** | Please? | 1:36.66 | 4.84 s | 40.4.5 | Chorus 2 | We're making a documentary / Can we interrupt your journey | DOC | 4 | Standing-height MS, handheld · Handheld, heavy; follow-pan right on 42.3 |
 | **S43** | The first rock | 1:41.50 | 1.51 s | 42.4.5 | Chorus 2 | I'm the penguin | CINEMA | 4 | MCU side, the rock filling frame right · Locked |
