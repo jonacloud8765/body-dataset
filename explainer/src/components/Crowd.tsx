@@ -118,7 +118,7 @@ type CrowdShadowProps = {
 };
 
 export const CrowdShadows: React.FC<CrowdShadowProps> = ({t, light = LIGHT_ACT1, exclude = [], animal, override = {}, opacity = 1}) => (
-  <g opacity={opacity}>
+  <g opacity={opacity} style={{filter: `blur(${light.blur.toFixed(2)}px)`}}>
     {AGENTS.map((ag) => {
       if (exclude.includes(ag.id) || ag.kind === 'cyclist') return null;
       const st = agentState(ag, t);
@@ -133,6 +133,7 @@ export const CrowdShadows: React.FC<CrowdShadowProps> = ({t, light = LIGHT_ACT1,
           facing={o.facing ?? st.facing}
           light={light}
           animal={animal ? animal(ag) : null}
+          groupBlurred
         />
       );
     })}

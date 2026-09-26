@@ -257,7 +257,7 @@ export const S10PerceivedStrength: React.FC<SceneProps> = ({T0}) => {
   const relax = p(t, 11.5, 13.5);
   const light = lerpLight(LIGHT_ACT1, LIGHT_ACT2, p(t, 11, 15.5));
   const protLight = {...light, opacity: Math.max(light.opacity, 0.62 * p(t, 0.5, 2.5)), blur: Math.min(light.blur, 1.6)};
-  const cam: Cam = {x: lerp(BRANCH_CAM.x, 900, p(t, 0.5, 4)), y: lerp(BRANCH_CAM.y, 600, p(t, 0.5, 4)), zoom: lerp(BRANCH_CAM.zoom, 1.0, p(t, 0.5, 4))};
+  const cam: Cam = {x: lerp(BRANCH_CAM.x, 900, p(t, 0.5, 4)), y: lerp(lerp(BRANCH_CAM.y, 600, p(t, 0.5, 4)), 575, p(t, 11.5, 16.5)), zoom: lerp(lerp(BRANCH_CAM.zoom, 1.0, p(t, 0.5, 4)), 0.95, p(t, 11.5, 16.5))};
   const sat = lerp(0.15, 1, p(t, 11.5, 15));
   const wt = FREEZE_T() + Math.max(0, t - 11.5) * p(t, 11.5, 13);
   const otherX = end.ot.x + 520 * p(t, 0, 5, EASE);
@@ -270,7 +270,7 @@ export const S10PerceivedStrength: React.FC<SceneProps> = ({T0}) => {
   return (
     <AbsoluteFill>
       <AbsoluteFill style={{filter: `saturate(${sat}) brightness(${lerp(0.72, 1, p(t, 11.5, 15))})`}}>
-        <Plaza cam={cam} sun={p(t, 11, 15.5)} wallLayer={<CrowdShadows t={wt} light={light} />} actorLayer={<Crowd t={wt} opacity={lerp(0.78, 1, p(t, 11.5, 15))} />} />
+        <Plaza cam={cam} sun={p(t, 11, 15.5)} wallLayer={<CrowdShadows t={wt} light={light} />} actorLayer={<Crowd t={wt} opacity={lerp(0.5, 1, p(t, 11.5, 15))} />} />
       </AbsoluteFill>
       <WorldLayer cam={cam}>
         <ShadowOf x={PROTAGONIST_X} lane={LANE} pose={protPose} scale={PS} light={protLight} grow={grow} animal={{kind: 'cat', t: cat, scale: 1.25}} />

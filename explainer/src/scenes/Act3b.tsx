@@ -105,14 +105,14 @@ export const S21Black: React.FC<SceneProps> = ({T0}) => {
   const facing: 1 | -1 = erratic && Math.sin(t * 3.3) < -0.6 ? -1 : 1;
   const otherX = 770;
   const wt = wt3(T, S('S17'), 0) - 2 * p(t, 0, 1);
-  const cam: Cam = {x: 640 + Math.sin(t * 0.7) * 30 * chaos + (rand(step) - 0.5) * 6 * chaos, y: 690 + Math.cos(t * 0.5) * 12 * chaos, zoom: 1.3 + Math.sin(t * 1.3) * 0.05 * chaos - 0.18 * p(t, 12.4, 16)};
+  const cam: Cam = {x: 620 + Math.sin(t * 0.7) * 30 * chaos + (rand(step) - 0.5) * 6 * chaos, y: 690 + Math.cos(t * 0.5) * 12 * chaos, zoom: 1.3 + Math.sin(t * 1.3) * 0.05 * chaos - 0.18 * p(t, 12.4, 16)};
   const head = anchor({x, y: LANE, pose, scale: PS, facing}, 'head');
   const hand = anchor({x, y: LANE, pose, scale: PS, facing}, 'HN');
   const cones = Array.from({length: 6}).map((_, i) => ({angle: rand(i * 9.1 + step * 0.37) * 360, spread: 8 + rand(i + step) * 14, radius: 200 + rand(i * 2.2 + step) * 360}));
   const quiet = p(t, 12.2, 13.6);
   return (
     <AbsoluteFill>
-      <AbsoluteFill style={{filter: `saturate(${lerp(0.1, 0.35, quiet)}) brightness(${lerp(0.42, 0.62, quiet)}) blur(${lerp(2.5, 1.2, quiet).toFixed(2)}px)`}}>
+      <AbsoluteFill style={{filter: `saturate(${lerp(lerp(0.16, 0.1, p(t, 0, 1.5)), 0.35, quiet)}) brightness(${lerp(lerp(0.5, 0.42, p(t, 0, 1.5)), 0.62, quiet)}) blur(${lerp(lerp(3.6, 2.5, p(t, 0, 1.5)), 1.2, quiet).toFixed(2)}px)`}}>
         <Plaza cam={cam} wallLayer={<CrowdShadows t={wt} light={LIGHT_ACT1} />} actorLayer={<Crowd t={wt} exclude={noCyclist} />} />
       </AbsoluteFill>
       <WorldLayer cam={cam}>
@@ -138,8 +138,8 @@ export const S21Black: React.FC<SceneProps> = ({T0}) => {
         <Figure x={x} y={LANE} pose={pose} scale={PS} facing={facing} heart={heartAt(T, {size: 4.6})} outline={locked ? {color: C.PAPER, width: 2, opacity: 0.8 * quiet} : null} />
         <ResponseCompass x={x} y={LANE - 112 * PS} draw={{fight: 1, flight: 1, freeze: 1, posture: 1, submit: 1}} lit={{fight: 0.5, flight: 0.5, freeze: locked ? 1 : 0.5, posture: 0.5, submit: 0.5}} rx={200} ry={120} scramble={chaos} seedT={t} opacity={0.8 * (1 - p(t, 14.5, 15.5))} litColor={C.PAPER} />
       </WorldLayer>
-      <Tunnel amount={0.35 * chaos + 0.25 * quiet} cx={W / 2} cy={H / 2 + 60} />
-      <Matte extra={62 * (1 - quiet) + 20} jitter={10 * chaos} frame={step} />
+      <Tunnel amount={lerp(0.72, 0.35 * chaos + 0.25 * quiet, p(t, 0, 1.5))} cx={W / 2} cy={H / 2 + 60} />
+      <Matte extra={62 * (1 - quiet) + 20 * quiet} jitter={10 * chaos} frame={step} />
       <Instruments T={T} t={t} cond={4} readoutAt={4.6} overload={chaos} frame={frame} />
       <ConditionReadout name={CONDITIONS[3].label} state={CONDITIONS[3].state} bpm="≈145–175 bpm" color={CONDITIONS[3].color} t={t + 5} out={p(t, 3.6, 4.4)} />
       <Tag text="Cognitive overload" t={t - 5.2} x={W / 2} y={250} color={C.BONE} size={34} out={p(t, 11.6, 12.2)} />

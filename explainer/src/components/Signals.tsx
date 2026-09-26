@@ -146,17 +146,23 @@ export const ConditionRail: React.FC<{level: number; x0?: number; x1?: number; y
   );
 };
 
-/** Seeded film grain, re-seeded every 2 frames. */
+/**
+ * Seeded film grain, re-seeded every 2 frames.
+ * Computed at quarter resolution and scaled up: procedural noise at full HD is the
+ * single most expensive operation in a software-rendered frame.
+ */
 export const Grain: React.FC<{frame: number; opacity?: number}> = ({frame, opacity = 0.05}) => {
   const seed = Math.floor(frame / 2) % 97;
+  const gw = W / 4;
+  const gh = H / 4;
   return (
     <AbsoluteFill style={{pointerEvents: 'none', mixBlendMode: 'overlay', opacity}}>
-      <svg width={W} height={H}>
+      <svg width={gw} height={gh} style={{position: 'absolute', left: 0, top: 0, transform: 'scale(4)', transformOrigin: '0 0'}}>
         <filter id={`grain${seed}`}>
-          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves={2} seed={seed} stitchTiles="stitch" />
+          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves={1} seed={seed} stitchTiles="stitch" />
           <feColorMatrix type="saturate" values="0" />
         </filter>
-        <rect width={W} height={H} filter={`url(#grain${seed})`} />
+        <rect width={gw} height={gh} filter={`url(#grain${seed})`} />
       </svg>
     </AbsoluteFill>
   );

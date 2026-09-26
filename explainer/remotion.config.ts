@@ -8,4 +8,5 @@ Config.setBrowserExecutable(
 Config.setVideoImageFormat('jpeg');
 Config.setJpegQuality(92);
 Config.setConcurrency(null);
-Config.setChromiumOpenGlRenderer('swangle');
+// 'angle' is ~4x faster than 'swangle' for this SVG-heavy film on CPU-only machines.
+Config.setChromiumOpenGlRenderer('angle');

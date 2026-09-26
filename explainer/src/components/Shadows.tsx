@@ -80,17 +80,20 @@ type ShadowOfProps = {
   grow?: number;
   animal?: {kind: Animal; t: number; scale?: number; eye?: string | null} | null;
   opacity?: number;
+  /** Skip the base blur (the caller blurs a whole group of shadows at once). */
+  groupBlurred?: boolean;
 };
 
 /** A figure's projection on the plaza wall, optionally morphing into an animal silhouette. */
-export const ShadowOf: React.FC<ShadowOfProps> = ({x, lane, pose, scale, facing = 1, light, grow = 1, animal = null, opacity = 1}) => {
+export const ShadowOf: React.FC<ShadowOfProps> = ({x, lane, pose, scale, facing = 1, light, grow = 1, animal = null, opacity = 1, groupBlurred = false}) => {
   const k = light.k * grow * scale;
   const baseY = WORLD.wallBase + (lane - WORLD.wallBase) * 0.15;
   const sx = x + light.dx;
   const at = animal ? animal.t : 0;
-  const midBlur = light.blur + 7 * Math.sin(Math.PI * at);
+  const morphBlur = 7 * Math.sin(Math.PI * at);
+  const blur = (groupBlurred ? 0 : light.blur) + morphBlur;
   return (
-    <g opacity={light.opacity * opacity} style={{filter: `blur(${midBlur.toFixed(2)}px)`}}>
+    <g opacity={light.opacity * opacity} style={blur > 0.3 ? {filter: `blur(${blur.toFixed(2)}px)`} : undefined}>
       {at < 1 ? (
         <g opacity={1 - at}>
           <Figure x={sx} y={baseY} pose={pose} scale={k} facing={facing} fill={C.SHADOW} rim={null} flat />

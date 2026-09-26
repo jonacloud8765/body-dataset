@@ -726,9 +726,12 @@ npm install
 npm run studio          # Remotion Studio, scrub the whole film
 npm run typecheck
 npx remotion still src/index.ts CalmButReady out/f.png --frame=2400 --scale=0.5
+npm run audio           # regenerate public/audio/soundtrack.wav from score.ts (render scripts do this if missing)
 npm run render:preview  # 960x540 full film -> out/calm-but-ready-540p.mp4
 npm run render          # 1920x1080 full film -> out/calm-but-ready.mp4
 ```
+
+**Render performance.** On CPU-only machines use the `angle` GL backend (set in `remotion.config.ts`). It measured about 4× faster than `swangle` for this film, roughly 0.1 s per 540p frame at concurrency 4. Grain is computed at quarter resolution, and crowd shadows share one group blur instead of one filter per shadow.
 
 `remotion.config.ts` points Remotion at a pre-installed headless Chromium. Override it with `REMOTION_BROWSER=/path/to/headless_shell`, or delete the line to let Remotion download its own. Fonts are **self-hosted** in `public/fonts`, so rendering needs no network.
 
@@ -822,11 +825,17 @@ explainer/
 - **Character:** `<Figure x y pose scale facing fill rim heart outline flat>`. The protagonist passes `heart={heartAt(T)}`. Ghosts and shadows pass `flat`. Freeze passes `outline`. Anchors (`anchor(props, 'head'|'heart'|'HN'|'wedge'|'P')`) give world positions for attaching signals such as attention fields, the phone, compass, and wedges.
 - **Condition meter:** `Instruments` (Act III) composes the `PulseLine` (tempo = `beatsAt`, color = `conditionColor(levelAt)`, overload copies in Black), the `ConditionRail` (continuous `level` 0–4, gradient fill, active node grows, ≈ranges), the `ConditionReadout` (name · state · ≈range), and the model caveat. `levelAt` is continuous, so color and fill always interpolate. **Rule: never display a single bpm number.**
 
-### 13.9 Audio integration (not yet implemented)
+### 13.9 Audio integration
 
-1. Export beat timestamps: sample `beatsAt` every frame and emit the times when `floor(beats)` increments. Deliver them as JSON to sound design, or place a heartbeat sample per beat with `<Sequence><Audio/></Sequence>` in the animatic.
-2. Put music, ambience, and VO stems in `public/audio/` and add `<Audio>` per act in `Film.tsx`. Automate volume per condition with `volume={(f) => ...}` (e.g. Red duck).
-3. Replace the `Caption` narration with VO and keep captions behind a `showCaptions` prop (default on for accessibility).
+**Implemented:** `scripts/make-audio.ts` (run with `npm run audio`) synthesizes `public/audio/soundtrack.wav` deterministically from `score.ts`:
+- a lub-dub heartbeat placed on the exact beat onsets of `beatsAt`, so sound and visuals cannot drift;
+- a filtered ambience bed that follows the condition: low-passed and ducked in Red (auditory exclusion), overlapping and loud in Black, near-silent at the freeze, fading out on the final beat.
+
+`Film.tsx` plays it with a single `<Audio>`. The WAV is git-ignored and regenerated on demand.
+
+**Still to do:**
+1. Replace the synthetic bed with designed stems (plaza ambience, the piano "ready" motif, the reversed swell for the rewind, the S04 tape-stop) in `public/audio/`, one `<Audio>` per act, with `volume={(f) => ...}` automation keyed to `levelAt`.
+2. Record VO, retime `SCENES` to it, and move `Caption` behind a `showCaptions` prop (default on for accessibility).
 
 ### 13.10 Programmatic vs. authored
 
@@ -855,7 +864,7 @@ Because the stage persists, transitions are **state interpolations inside scenes
 
 ### 13.14 Known gaps and next steps (priority order)
 
-1. **Audio:** heartbeat stem synced to `beatsAt`, ambience, music, VO (13.9).
+1. **Audio:** designed stems, music, and VO on top of the generated heartbeat and ambience (13.9).
 2. **Morph quality:** gooey or point-matched shadow morphs; refine the dog and wolf silhouettes; add pigeons (Freeze, Black).
 3. **Style-frame pass:** lock SF1 plaza wide (S02), SF2 compass (S04), SF3 freeze (S07), SF4 perceived shadow (S10), SF5 capability/intent (S14), SF6 Yellow ring (S18), SF7 Red tunnel (S20), SF8 Black fragmentation (S21), SF9 chain (S23).
 4. **Performance:** cache static plaza layers; reduce blur areas; consider `--gl=angle` on GPU machines.

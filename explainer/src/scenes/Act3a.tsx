@@ -1,7 +1,7 @@
 import React from 'react';
 import {AbsoluteFill} from 'remotion';
 import {C, CONDITIONS, W, mixHex} from '../theme';
-import {EASE, EASE_OUT, LINEAR, clamp, lerp, p} from '../lib/anim';
+import {EASE, EASE_OUT, LINEAR, clamp, kf, lerp, p} from '../lib/anim';
 import {Figure, POSES, anchor, mixPose, walkPose} from '../components/Figure';
 import {Cam, Plaza, WORLD, laneScale} from '../components/World';
 import {Crowd, CrowdShadows} from '../components/Crowd';
@@ -53,14 +53,14 @@ export const S16Rewind: React.FC<SceneProps> = ({T0}) => {
   const wt = lerp(wtEnd, 12, back);
   const x = lerp(1500, 160, back);
   const pose = back < 1 ? walkPose((x - 160) / 96, 0.95) : POSES.stand;
-  const cam: Cam = {x: lerp(900, 420, back), y: lerp(575, 640, back), zoom: 0.95};
+  const cam: Cam = {x: lerp(900, 440, back), y: lerp(575, 640, back), zoom: lerp(0.95, 0.98, back)};
   const heart = heartAt(T);
   const h = anchor({x, y: LANE, pose, scale: PS}, 'heart');
   const drop = p(t, 4.4, 5.4);
   const rewinding = t > 0.3 && t < 4.6;
   return (
     <AbsoluteFill>
-      <AbsoluteFill style={{filter: `saturate(${rewinding ? 0.5 : lerp(0.5, 1, p(t, 4.6, 5.4))})`}}>
+      <AbsoluteFill style={{filter: `saturate(${kf(t, [[0, 1], [0.3, 0.5], [4.6, 0.5], [5.4, 1]])})`}}>
         <Plaza cam={cam} sun={0} wallLayer={<CrowdShadows t={wt} light={LIGHT_ACT1} />} actorLayer={<Crowd t={wt} exclude={noCyclist} />} />
       </AbsoluteFill>
       <WorldLayer cam={cam}>
@@ -70,7 +70,7 @@ export const S16Rewind: React.FC<SceneProps> = ({T0}) => {
               return <Figure key={i} x={bx} y={LANE} pose={walkPose((bx - 160) / 96, 0.95)} scale={PS} fill={C.BONE} rim={null} flat opacity={0.16 - i * 0.04} />;
             })
           : null}
-        <Figure x={x} y={LANE} pose={pose} scale={PS} heart={heart} />
+        <Figure x={x} y={LANE} pose={pose} scale={PS} heart={heart} opacity={p(t, 0, 0.5)} />
       </WorldLayer>
       {drop > 0 ? (
         <svg width={W} height={1080} style={{position: 'absolute', left: 0, top: 0}}>

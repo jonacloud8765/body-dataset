@@ -22,7 +22,7 @@ export const OTHER_START = {x: 1930, lane: WORLD.lane.back + 4};
 export const protagonistS02 = (t: number) => {
   const x = lerp(160, PROTAGONIST_X, clamp(t / 16));
   const phase = (x - 160) / 96;
-  const walk = walkPose(phase, 0.95);
+  const walk = mixPose(POSES.stand, walkPose(phase, 0.95), p(t, 0, 0.8));
   const phoneAmt = p(t, 4.5, 5.3) * (1 - p(t, 9, 9.8));
   const pose = {...walk, head: lerp(walk.head, POSES.phone.head, phoneAmt), shN: lerp(walk.shN, POSES.phone.shN, phoneAmt), elN: lerp(walk.elN, POSES.phone.elN, phoneAmt)};
   return {x, pose, phoneAmt};
@@ -43,9 +43,8 @@ export const S01Pulse: React.FC<SceneProps> = ({T0}) => {
   const world = p(t, 5.6, 8.4);
   const cam: Cam = {x: lerp(560, 520, p(t, 5, 12)), y: lerp(560, 640, p(t, 5.6, 9.5)), zoom: lerp(1.25, 1.08, p(t, 5.6, 12))};
   const beats = beatsAt(T);
-  const pose = walkPose(0, 0);
+  const pose = POSES.stand;
   const heart = heartAt(T);
-  const dotX = lerp(1500, 0, 0);
   return (
     <AbsoluteFill style={{background: C.INK}}>
       <AbsoluteFill style={{opacity: world}}>
@@ -54,12 +53,12 @@ export const S01Pulse: React.FC<SceneProps> = ({T0}) => {
       <WorldLayer cam={cam}>
         <g opacity={p(t, 7.4, 8.6)}>
           <ShadowOf x={160} lane={LANE} pose={pose} scale={PS} light={LIGHT_ACT1} />
-          <Figure x={160} y={LANE} pose={{...pose, ...POSES.stand}} scale={PS} heart={heart} />
+          <Figure x={160} y={LANE} pose={pose} scale={PS} heart={heart} />
         </g>
       </WorldLayer>
       <AbsoluteFill style={{opacity: 1 - lineOut}}>
         <svg width={W} height={H}>
-          <PulseLine x0={160} x1={dotX + 1760 * draw} y={lerp(H / 2, 470, lineOut)} phase={beats} beatsVisible={5 * Math.max(0.05, draw)} amp={70} draw={1} color={C.PAPER} />
+          <PulseLine x0={160} x1={160 + 1600 * draw} y={lerp(H / 2, 470, lineOut)} phase={beats} beatsVisible={5 * Math.max(0.05, draw)} amp={70} draw={1} color={C.PAPER} />
           <circle cx={160 + 1600 * draw} cy={H / 2} r={5 + 4 * heart.pulse} fill={C.PAPER} opacity={draw < 1 ? 1 : 1 - lineOut} />
         </svg>
       </AbsoluteFill>
@@ -155,7 +154,7 @@ export const S04Branch: React.FC<SceneProps> = ({T0}) => {
   return (
     <AbsoluteFill>
       <AbsoluteFill style={{filter: `saturate(${lerp(0.75, 0.15, freeze)}) brightness(${lerp(1, 0.72, freeze)})`}}>
-        <Plaza cam={cam} wallLayer={<CrowdShadows t={worldT} light={LIGHT_ACT1} />} actorLayer={<Crowd t={worldT} opacity={0.78} />} />
+        <Plaza cam={cam} wallLayer={<CrowdShadows t={worldT} light={LIGHT_ACT1} />} actorLayer={<Crowd t={worldT} opacity={lerp(0.78, 0.5, p(t, 1, 2.5))} />} />
       </AbsoluteFill>
       <WorldLayer cam={cam}>
         <ShadowOf x={st.otherX} lane={LANE} pose={st.otherPose} scale={PS} facing={-1} light={LIGHT_ACT1} />
