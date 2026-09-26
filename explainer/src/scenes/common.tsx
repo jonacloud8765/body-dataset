@@ -40,11 +40,11 @@ export const heartAt = (T: number, extra?: {size?: number; glow?: number}) => ({
 });
 
 /** Caption line in the lower matte bar (narration rendered as restrained text). */
-export const Caption: React.FC<{text: string; t: number; a: number; b: number}> = ({text, t, a, b}) => {
+export const Caption: React.FC<{text: string; t: number; a: number; b: number; lift?: number}> = ({text, t, a, b, lift = 0}) => {
   if (t < a || t > b) return null;
   const o = Math.min(1, (t - a) / 0.5, (b - t) / 0.5);
   return (
-    <div style={{position: 'absolute', left: '50%', bottom: 69, transform: 'translate(-50%, 50%)', fontFamily: 'inherit', color: '#E9E4D8', opacity: o, fontSize: 34, whiteSpace: 'nowrap', letterSpacing: '0.01em'}}>
+    <div style={{position: 'absolute', left: '50%', bottom: 69 + lift, transform: 'translate(-50%, 50%)', fontFamily: 'inherit', color: '#E9E4D8', opacity: o, fontSize: lift ? 32 : 34, whiteSpace: 'nowrap', letterSpacing: '0.01em', textShadow: lift ? '0 2px 14px rgba(0,0,0,0.9), 0 0 4px rgba(0,0,0,0.8)' : undefined}}>
       {text}
     </div>
   );

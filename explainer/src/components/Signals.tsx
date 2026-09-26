@@ -47,6 +47,7 @@ export const AttentionField: React.FC<{x: number; y: number; angle: number; spre
         </radialGradient>
       </defs>
       <path d={d} fill={`url(#${gid})`} />
+      {spread >= 179.9 ? <circle cx={x} cy={y} r={radius * 0.92} fill="none" stroke={color} strokeWidth={1.5} opacity={0.22} /> : null}
     </g>
   );
 };

@@ -7,6 +7,9 @@ import {SceneProps} from './scenes/common';
 import {makePlaceholder} from './scenes/Placeholder';
 import {S01Pulse, S02OrdinaryDay, S03Shift, S04Branch} from './scenes/Act1Open';
 import {S11Flock, S12Wolf, S13Sheepdog, S14CapabilityIntent, S15Prepared} from './scenes/Act2';
+import {S16Rewind, S17White, S18Yellow, S19Orange} from './scenes/Act3a';
+import {S20Red, S21Black, S22Readout} from './scenes/Act3b';
+import {S23Chain, S24Coda} from './scenes/Act4';
 import {S05Fight, S06Flight, S07Freeze, S08Submit, S09Posture, S10PerceivedStrength} from './scenes/Act1Responses';
 
 const REGISTRY: Record<string, React.FC<SceneProps>> = {
@@ -25,6 +28,15 @@ const REGISTRY: Record<string, React.FC<SceneProps>> = {
   S13: S13Sheepdog,
   S14: S14CapabilityIntent,
   S15: S15Prepared,
+  S16: S16Rewind,
+  S17: S17White,
+  S18: S18Yellow,
+  S19: S19Orange,
+  S20: S20Red,
+  S21: S21Black,
+  S22: S22Readout,
+  S23: S23Chain,
+  S24: S24Coda,
 };
 
 export const Film: React.FC = () => {

@@ -23,7 +23,7 @@ const DOG_X = 1060;
 const WOLF_X = 1480;
 
 /** World clock for Act II (continues from S10, holds during the S14 tableau). */
-const wt2 = (T: number) => {
+export const wt2 = (T: number) => {
   const base = FREEZE_T() + 5.5;
   const t14 = S('S14');
   const t15 = S('S15');
