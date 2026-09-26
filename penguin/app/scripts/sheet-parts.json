@@ -1,16 +1,117 @@
 {
-  "_doc": "Where each drawing sits on the model sheet (penguin/source/him-model-sheet.jpg, 1366x768 px). box = [x0, y0, x1, y1]. anchor = the part's origin: feet baseline center for bodies, the neck base for heads. keep (optional) = polygon that isolates the figure from nearby marks. Used by trace-sheet.py.",
-  "parts": {
-    "body.front":   {"box": [34, 155, 184, 545], "anchor": "feet"},
-    "body.34":      {"box": [186, 157, 326, 546], "anchor": "feet"},
-    "head.frown":     {"box": [356, 119, 490, 268], "anchor": "bottom"},
-    "head.sideeye":   {"box": [495, 118, 621, 270], "anchor": "bottom"},
-    "head.smirk":     {"box": [628, 112, 754, 269], "anchor": "bottom"},
-    "head.annoyed":   {"box": [767, 132, 880, 270], "anchor": "bottom"},
-    "head.profile":   {"box": [899, 130, 1019, 273], "anchor": "bottom"},
-    "head.laugh":     {"box": [359, 292, 487, 446], "anchor": "bottom"},
-    "head.sad":       {"box": [496, 302, 617, 444], "anchor": "bottom"},
-    "head.surprised": {"box": [619, 292, 747, 445], "anchor": "bottom"},
-    "head.angry":     {"box": [762, 292, 882, 447], "anchor": "bottom"}
-  }
+  "_doc": "Where each drawing sits on the model sheet (penguin/source/him-model-sheet.jpg, 1366x768 px), in sheet pixels. Used by trace-sheet.py. Bodies are cut into rig parts by keep-polygons and share one frame: the body's feet baseline center. Joints are the pivots the rig bends at. Heads are registered onto each body's own head automatically. Poses are whole drawings (the climbing takes), cleaned of the rocks by their keep-polygons.",
+  "bodies": {
+    "34": {
+      "box": [186, 157, 326, 546],
+      "head": [205, 158, 300, 240],
+      "parts": {
+        "head": [[186, 150], [326, 150], [326, 241], [186, 241]],
+        "torso": [[186, 226], [326, 226], [326, 423], [250, 423], [249, 425], [224, 425], [223, 441], [186, 441]],
+        "footFar": [[188, 499], [255, 499], [257, 550], [188, 550]],
+        "footNear": [[257, 497], [326, 497], [326, 550], [257, 550]]
+      },
+      "joints": {
+        "neck": [258, 238],
+        "hipFar": [235, 421],
+        "hipNear": [270, 419],
+        "ankleFar": [236, 503],
+        "ankleNear": [273, 501],
+        "shoulderFar": [232, 252],
+        "shoulderNear": [283, 254]
+      },
+      "legs": {
+        "Far": {
+          "range": [213, 252],
+          "top": 444,
+          "hem": 484,
+          "ankle": 496,
+          "cuff": 489,
+          "cut": 425
+        },
+        "Near": {
+          "range": [251, 293],
+          "top": 428,
+          "hem": 481,
+          "ankle": 494,
+          "cuff": 486,
+          "cut": 423
+        }
+      },
+      "fade": {
+        "own": [228, 239],
+        "sheet": [231, 243]
+      }
+    },
+    "front": {
+      "box": [34, 155, 184, 545],
+      "head": [60, 158, 160, 234],
+      "parts": {
+        "head": [[34, 150], [184, 150], [184, 238], [34, 238]],
+        "torso": [[34, 226], [184, 226], [184, 424], [126, 424], [116, 440], [100, 440], [90, 424], [34, 424]],
+        "footL": [[46, 501], [104, 501], [104, 546], [46, 546]],
+        "footR": [[114, 501], [174, 501], [174, 546], [114, 546]]
+      },
+      "joints": {
+        "neck": [109, 235],
+        "hipL": [85, 420],
+        "hipR": [129, 420],
+        "ankleL": [89, 505],
+        "ankleR": [127, 505],
+        "shoulderL": [74, 250],
+        "shoulderR": [144, 250]
+      },
+      "legs": {
+        "L": {
+          "range": [60, 107],
+          "top": 428,
+          "hem": 483,
+          "ankle": 496,
+          "cuff": 488,
+          "cut": 424
+        },
+        "R": {
+          "range": [107, 152],
+          "top": 428,
+          "hem": 483,
+          "ankle": 496,
+          "cuff": 488,
+          "cut": 424
+        }
+      },
+      "fade": {
+        "own": [228, 236],
+        "sheet": [228, 240]
+      }
+    }
+  },
+  "heads": {
+    "frown": {
+      "box": [356, 119, 490, 268]
+    },
+    "sideeye": {
+      "box": [495, 118, 621, 270]
+    },
+    "smirk": {
+      "box": [628, 112, 754, 269]
+    },
+    "annoyed": {
+      "box": [767, 132, 880, 270]
+    },
+    "profile": {
+      "box": [899, 130, 1019, 273]
+    },
+    "laugh": {
+      "box": [359, 292, 487, 446]
+    },
+    "sad": {
+      "box": [496, 302, 617, 444]
+    },
+    "surprised": {
+      "box": [619, 292, 747, 445]
+    },
+    "angry": {
+      "box": [762, 292, 882, 447]
+    }
+  },
+  "poses": {}
 }

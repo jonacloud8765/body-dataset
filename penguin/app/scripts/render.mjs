@@ -1,6 +1,6 @@
 // Renders a composition, then muxes in the untouched song.
 //
-//   node scripts/render.mjs <CompositionId> <out.mp4> [extra `remotion render` flags]
+//   node scripts/render.mjs <CompositionId> <out.mp4> [--audio-from <seconds>] [extra `remotion render` flags]
 //
 // Remotion's own audio pass encodes AAC without the edit list that trims the encoder's
 // priming samples, which leaves the song 2048 samples (42.7 ms, 1.3 frames) late against the
@@ -12,7 +12,10 @@ import {dirname, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 const here = dirname(fileURLToPath(import.meta.url));
-const [id, out, ...extra] = process.argv.slice(2);
+const argv = process.argv.slice(2);
+const fromIdx = argv.indexOf('--audio-from');
+const audioFrom = fromIdx >= 0 ? argv.splice(fromIdx, 2)[1] : '0';
+const [id, out, ...extra] = argv;
 if (!id || !out) {
   console.error('usage: node scripts/render.mjs <CompositionId> <out.mp4> [remotion render flags]');
   process.exit(1);
@@ -28,7 +31,7 @@ const run = (args) => {
 };
 const picture = out.replace(/\.mp4$/, '.picture.mp4');
 run(['remotion', 'render', 'src/index.ts', id, picture, '--muted', ...extra]);
-run(['remotion', 'ffmpeg', '-v', 'error', '-y', '-i', picture, '-i', song, '-map', '0:v', '-map', '1:a',
+run(['remotion', 'ffmpeg', '-v', 'error', '-y', '-i', picture, '-ss', audioFrom, '-i', song, '-map', '0:v', '-map', '1:a', '-shortest',
   '-c:v', 'copy', '-c:a', 'aac', '-b:a', '320k', '-movflags', '+faststart', out]);
 rmSync(resolve(here, '..', picture));
 console.log(`wrote ${out}`);
